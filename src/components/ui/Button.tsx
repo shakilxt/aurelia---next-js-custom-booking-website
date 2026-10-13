@@ -17,12 +17,12 @@ const base =
   "inline-flex items-center justify-center gap-2.5 rounded-sm border text-[0.8125rem] font-medium uppercase tracking-[0.14em] whitespace-nowrap transition-colors duration-200 ease-out-soft disabled:cursor-not-allowed disabled:opacity-50";
 
 const variants: Record<ButtonVariant, string> = {
-  primary: "border-forest-800 bg-forest-800 text-ivory hover:border-forest-900 hover:bg-forest-900",
+  primary: "border-forest-800 bg-forest-800 text-shell hover:border-forest-900 hover:bg-forest-900",
   secondary:
-    "border-charcoal/70 bg-transparent text-charcoal hover:border-forest-800 hover:bg-forest-800 hover:text-ivory",
-  light: "border-ivory bg-ivory text-forest-900 hover:border-white hover:bg-white",
+    "border-charcoal/70 bg-transparent text-charcoal hover:border-forest-800 hover:bg-forest-800 hover:text-shell",
+  light: "border-shell bg-shell text-forest-900 hover:border-white hover:bg-white",
   "outline-light":
-    "border-ivory/70 bg-transparent text-ivory hover:border-ivory hover:bg-ivory hover:text-forest-900",
+    "border-shell/70 bg-transparent text-shell hover:border-shell hover:bg-shell hover:text-forest-900",
 };
 
 const sizes: Record<ButtonSize, string> = {

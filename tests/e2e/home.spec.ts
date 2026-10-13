@@ -16,6 +16,15 @@ async function pickDates(page: Page, from: number, to: number) {
 }
 
 test.describe("homepage", () => {
+  test("hero shortcuts open the stays listing filtered by type", async ({ page, isMobile }) => {
+    test.skip(isMobile, "the shortcuts are desktop only");
+    await page.goto("/");
+    const shortcuts = page.getByRole("navigation", { name: "Stays by type" });
+    await shortcuts.getByRole("link", { name: "Ocean suites" }).click();
+    await expect(page).toHaveURL("/stays?type=suite");
+    await expect(page.getByRole("radio", { name: "Suites" })).toBeChecked();
+  });
+
   test("presents every section in order", async ({ page }) => {
     await page.goto("/");
     await expect(page.getByRole("main").getByRole("heading", { level: 2 })).toHaveText([

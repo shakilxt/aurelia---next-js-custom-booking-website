@@ -192,7 +192,7 @@ export function BookingForm({
               ? `Estimated total for ${estimate.nights} ${estimate.nights === 1 ? "night" : "nights"}`
               : "Estimated total"}
           </span>
-          <span className="font-serif text-[1.75rem] leading-none text-forest-900 tabular-nums">
+          <span className="font-serif text-[1.75rem] leading-none font-semibold text-forest-900 tabular-nums">
             {estimate ? formatMoney(estimate.totalMinor, estimate.currency) : "–"}
           </span>
         </p>

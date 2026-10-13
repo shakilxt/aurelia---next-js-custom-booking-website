@@ -9,7 +9,7 @@ import { categoryLabels } from "@/lib/stays";
 export function BookingResidence({ stay }: { stay: Accommodation }) {
   return (
     <div className="flex items-center gap-4 lg:block">
-      <div className="relative aspect-4/3 w-24 shrink-0 overflow-hidden bg-sand sm:w-32 lg:aspect-video lg:w-full">
+      <div className="relative aspect-4/3 w-24 shrink-0 overflow-hidden bg-mist sm:w-32 lg:aspect-video lg:w-full">
         <ResortImage asset={stay.images[0]} fill sizes="(min-width: 64rem) 34vw, 8rem" />
       </div>
       <div className="min-w-0 lg:mt-5">

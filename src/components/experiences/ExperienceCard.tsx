@@ -17,7 +17,7 @@ export function ExperienceCard({
   const Heading = `h${headingLevel}` as const;
   return (
     <article className="flex h-full flex-col">
-      <div className="relative aspect-4/3 overflow-hidden bg-sand sm:aspect-4/5">
+      <div className="relative aspect-4/3 overflow-hidden bg-mist sm:aspect-4/5">
         <ResortImage asset={experience.image} fill sizes={sizes} />
       </div>
       <p className="mt-5 text-eyebrow font-medium text-gold-ink uppercase">

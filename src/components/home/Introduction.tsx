@@ -33,7 +33,7 @@ export function Introduction({ images: [primary, secondary], facts }: Introducti
           {facts.map((fact) => (
             <div key={fact.label} className="flex flex-col-reverse justify-end">
               <dt className="mt-1 text-sm text-muted">{fact.label}</dt>
-              <dd className="font-serif text-[2.5rem] leading-none text-forest-900 lining-nums">
+              <dd className="font-serif text-[2.5rem] leading-none font-semibold text-forest-900 lining-nums">
                 {fact.value}
               </dd>
             </div>
@@ -42,14 +42,14 @@ export function Introduction({ images: [primary, secondary], facts }: Introducti
       </div>
 
       <div className="relative lg:col-span-6 lg:col-start-7">
-        <div className="relative aspect-4/5 reveal overflow-hidden bg-sand sm:w-4/5">
+        <div className="relative aspect-4/5 reveal overflow-hidden bg-mist sm:w-4/5">
           <ResortImage
             asset={primary}
             fill
             sizes="(min-width: 64rem) 36vw, (min-width: 40rem) 80vw, 100vw"
           />
         </div>
-        <div className="relative -mt-24 ml-auto aspect-square w-1/2 reveal overflow-hidden border-8 border-ivory bg-sand sm:-mt-40 sm:w-[45%]">
+        <div className="relative -mt-24 ml-auto aspect-square w-1/2 reveal overflow-hidden border-8 border-shell bg-mist sm:-mt-40 sm:w-[45%]">
           <ResortImage asset={secondary} fill sizes="(min-width: 64rem) 22vw, 45vw" />
         </div>
       </div>

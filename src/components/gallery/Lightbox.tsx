@@ -17,7 +17,7 @@ interface LightboxProps {
 const SWIPE_THRESHOLD = 48;
 
 const navButton =
-  "absolute top-1/2 z-10 inline-flex size-12 -translate-y-1/2 items-center justify-center rounded-full bg-forest-900/70 text-ivory transition-colors hover:bg-forest-900";
+  "absolute top-1/2 z-10 inline-flex size-12 -translate-y-1/2 items-center justify-center rounded-full bg-forest-900/70 text-shell transition-colors hover:bg-forest-900";
 
 /**
  * Full-screen photo viewer on the native <dialog>: focus containment, Escape and focus
@@ -66,12 +66,12 @@ export function Lightbox({ items, index, onIndexChange, onClose }: LightboxProps
       onClose={onClose}
       onKeyDown={handleKeyDown}
       data-surface="dark"
-      className="lightbox m-0 h-dvh max-h-none w-screen max-w-none bg-forest-900 p-0 text-ivory backdrop:bg-forest-900"
+      className="lightbox m-0 h-dvh max-h-none w-screen max-w-none bg-forest-900 p-0 text-shell backdrop:bg-forest-900"
     >
       {item && index !== null ? (
         <div className="flex h-full flex-col">
           <div className="flex items-center justify-between gap-4 px-4 py-3 sm:px-6">
-            <p className="text-sm text-ivory/80 tabular-nums">
+            <p className="text-sm text-shell/80 tabular-nums">
               {index + 1} / {items.length}
               <span className="ml-3 text-xs tracking-[0.14em] text-gold uppercase">
                 {galleryCategoryLabels[item.category]}
@@ -125,7 +125,7 @@ export function Lightbox({ items, index, onIndexChange, onClose }: LightboxProps
 
           <p
             aria-live="polite"
-            className="mx-auto max-w-3xl px-6 pt-4 pb-6 text-center text-sm text-ivory/85 sm:pb-8"
+            className="mx-auto max-w-3xl px-6 pt-4 pb-6 text-center text-sm text-shell/85 sm:pb-8"
           >
             <span className="sr-only">
               Photo {index + 1} of {items.length}:{" "}

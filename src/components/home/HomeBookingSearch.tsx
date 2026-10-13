@@ -12,7 +12,7 @@ export function HomeBookingSearch({ maxGuests }: { maxGuests: number }) {
     <Container className="relative z-10 pt-10 lg:-mt-20 lg:pt-0">
       <section
         aria-labelledby="booking-search-title"
-        className="border border-line bg-ivory p-5 sm:p-8 lg:shadow-soft"
+        className="border border-line bg-shell p-5 sm:p-8 lg:shadow-soft"
       >
         <div className="mb-6 flex flex-wrap items-baseline justify-between gap-x-8 gap-y-2">
           <h2 id="booking-search-title" className="text-h3 text-forest-900">

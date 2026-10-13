@@ -81,7 +81,7 @@ export function DateRangeSelector({
             onPointerEnter={loadCalendar}
             onFocus={loadCalendar}
             className={cx(
-              "flex min-h-16 flex-col items-start justify-center px-4 py-3 text-left transition-colors hover:bg-sand-light",
+              "flex min-h-16 flex-col items-start justify-center px-4 py-3 text-left transition-colors hover:bg-mist-light",
               field.error && "outline-2 -outline-offset-2 outline-danger",
             )}
           >

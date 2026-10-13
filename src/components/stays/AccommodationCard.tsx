@@ -26,7 +26,7 @@ export function AccommodationCard({
 
   return (
     <article className="group relative flex w-full flex-col">
-      <div className="relative aspect-4/3 overflow-hidden bg-sand">
+      <div className="relative aspect-4/3 overflow-hidden bg-mist">
         <ResortImage
           asset={cover}
           fill
@@ -60,7 +60,7 @@ export function AccommodationCard({
             m²
           </p>
           <p className="shrink-0 text-right">
-            <span className="block font-serif text-2xl leading-none text-forest-900">
+            <span className="block font-serif text-2xl leading-none font-semibold text-forest-900">
               {formatMoney(stay.nightlyRateMinor, stay.currency)}
             </span>
             <span className="block text-xs leading-5 text-muted">per night · demo rate</span>

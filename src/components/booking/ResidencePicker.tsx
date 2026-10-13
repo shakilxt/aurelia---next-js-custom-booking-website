@@ -26,7 +26,7 @@ export function ResidencePicker({ stays, selection }: ResidencePickerProps) {
         return (
           <li key={stay.slug} className="flex">
             <article className="group relative flex w-full gap-4 border border-line bg-white p-3 transition-colors hover:border-forest-800 sm:gap-5 sm:p-4">
-              <div className="relative aspect-4/3 w-28 shrink-0 self-start overflow-hidden bg-sand sm:w-40">
+              <div className="relative aspect-4/3 w-28 shrink-0 self-start overflow-hidden bg-mist sm:w-40">
                 <ResortImage asset={stay.images[0]} fill sizes="(min-width: 40rem) 10rem, 7rem" />
               </div>
               <div className="flex min-w-0 flex-1 flex-col">
@@ -49,7 +49,7 @@ export function ResidencePicker({ stays, selection }: ResidencePickerProps) {
                   <p className="mt-1 text-sm text-danger">Smaller than your party of {party}</p>
                 ) : null}
                 <p className="mt-auto pt-3">
-                  <span className="font-serif text-xl text-forest-900">
+                  <span className="font-serif text-xl font-semibold text-forest-900">
                     {formatMoney(stay.nightlyRateMinor, stay.currency)}
                   </span>{" "}
                   <span className="text-xs text-muted">per night · demo rate</span>

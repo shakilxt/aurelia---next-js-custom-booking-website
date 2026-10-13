@@ -25,24 +25,24 @@ const calendarClassNames: Partial<ClassNames> = {
   months: "flex flex-col gap-8 md:flex-row md:gap-10",
   month: "w-full",
   month_caption: "flex h-11 items-center justify-center",
-  caption_label: "font-serif text-xl text-forest-900",
+  caption_label: "font-serif font-semibold text-xl text-forest-900",
   nav: "pointer-events-none absolute inset-x-0 top-0 z-10 flex h-11 items-center justify-between",
   button_previous:
-    "pointer-events-auto inline-flex size-11 items-center justify-center rounded-sm hover:bg-sand-light aria-disabled:opacity-30 aria-disabled:hover:bg-transparent",
+    "pointer-events-auto inline-flex size-11 items-center justify-center rounded-sm hover:bg-mist-light aria-disabled:opacity-30 aria-disabled:hover:bg-transparent",
   button_next:
-    "pointer-events-auto inline-flex size-11 items-center justify-center rounded-sm hover:bg-sand-light aria-disabled:opacity-30 aria-disabled:hover:bg-transparent",
+    "pointer-events-auto inline-flex size-11 items-center justify-center rounded-sm hover:bg-mist-light aria-disabled:opacity-30 aria-disabled:hover:bg-transparent",
   chevron: "size-4 fill-forest-900",
   month_grid: "mt-3 w-full border-collapse",
   weekday: "pb-2 text-xs font-medium text-muted",
   day: "p-0 text-center",
   day_button:
-    "mx-auto flex size-10 items-center justify-center rounded-sm text-sm transition-colors hover:bg-sand disabled:cursor-not-allowed disabled:text-charcoal/30 disabled:hover:bg-transparent sm:size-11",
+    "mx-auto flex size-10 items-center justify-center rounded-sm text-sm transition-colors hover:bg-mist disabled:cursor-not-allowed disabled:text-charcoal/30 disabled:hover:bg-transparent sm:size-11",
   today: "font-semibold text-forest-900",
   range_start:
-    "bg-sand [&>button]:bg-forest-800 [&>button]:text-ivory [&>button]:hover:bg-forest-900",
+    "bg-mist [&>button]:bg-forest-800 [&>button]:text-shell [&>button]:hover:bg-forest-900",
   range_end:
-    "bg-sand [&>button]:bg-forest-800 [&>button]:text-ivory [&>button]:hover:bg-forest-900",
-  range_middle: "bg-sand [&>button]:rounded-none",
+    "bg-mist [&>button]:bg-forest-800 [&>button]:text-shell [&>button]:hover:bg-forest-900",
+  range_middle: "bg-mist [&>button]:rounded-none",
   hidden: "invisible",
 };
 
@@ -51,7 +51,7 @@ const calendarClassNames: Partial<ClassNames> = {
  * ends), so this modifier gives it the same filled style while check-out is pending.
  */
 const modifiersClassNames = {
-  checkInOnly: "[&>button]:bg-forest-800 [&>button]:text-ivory [&>button]:hover:bg-forest-900",
+  checkInOnly: "[&>button]:bg-forest-800 [&>button]:text-shell [&>button]:hover:bg-forest-900",
 };
 
 /**

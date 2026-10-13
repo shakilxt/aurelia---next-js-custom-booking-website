@@ -17,12 +17,15 @@ export function SiteHeader() {
         className={cx(
           // The bar's height includes its border, so it is exactly --header-h tall and the
           // home hero, pulled up by --header-h, meets the top of the viewport with no gap.
-          "h-(--header-h) border-b border-line bg-ivory text-forest-900 transition-colors duration-300",
-          "header-overlay:border-ivory/20 header-overlay:bg-transparent header-overlay:text-ivory",
+          "h-(--header-h) border-b border-line bg-shell text-forest-900 transition-colors duration-300",
+          "header-overlay:border-shell/20 header-overlay:bg-transparent header-overlay:text-shell",
         )}
       >
         <Container className="flex h-full items-center justify-between gap-6">
-          <Link href="/" className="font-serif text-2xl tracking-[0.32em] lg:text-[1.75rem]">
+          <Link
+            href="/"
+            className="font-serif text-2xl font-semibold tracking-[0.32em] lg:text-[1.75rem]"
+          >
             {site.name}
             <span className="sr-only"> — home</span>
           </Link>
@@ -45,7 +48,7 @@ export function SiteHeader() {
               className={cx(
                 buttonClasses(),
                 "max-sm:hidden",
-                "header-overlay:border-ivory/70 header-overlay:bg-transparent header-overlay:hover:bg-ivory header-overlay:hover:text-forest-900",
+                "header-overlay:border-shell/70 header-overlay:bg-transparent header-overlay:hover:bg-shell header-overlay:hover:text-forest-900",
               )}
             >
               {bookingCta.label}

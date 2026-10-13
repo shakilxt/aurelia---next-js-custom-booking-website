@@ -1,16 +1,11 @@
-import { DM_Sans } from "next/font/google";
-import localFont from "next/font/local";
+import { DM_Sans, Lora } from "next/font/google";
 
-// Self-hosted by next/font at build time; no runtime request to Google Fonts or Fontshare.
-// Gambetta's files are fetched by scripts/fetch-fonts.mjs (see its note on the licence).
-export const serif = localFont({
-  src: [
-    { path: "../assets/fonts/Gambetta-Regular.woff2", weight: "400", style: "normal" },
-    { path: "../assets/fonts/Gambetta-Italic.woff2", weight: "400", style: "italic" },
-  ],
+// Self-hosted by next/font at build time; no runtime request to Google Fonts.
+// Lora is a variable font, so one file covers every weight.
+export const serif = Lora({
+  subsets: ["latin"],
   display: "swap",
-  variable: "--font-gambetta",
-  fallback: ["Georgia", "Times New Roman", "serif"],
+  variable: "--font-lora",
 });
 
 export const sans = DM_Sans({

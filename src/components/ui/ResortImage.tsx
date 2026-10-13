@@ -19,7 +19,7 @@ interface ResortImageProps {
 }
 
 /**
- * Photography wrapper. A sand-coloured surface sits behind every image, so slow or
+ * Photography wrapper. A mist-coloured surface sits behind every image, so slow or
  * failed loads degrade to a calm block rather than a broken icon. Lazy images also get
  * a blur placeholder; above-the-fold images skip it, because next/image paints it as an
  * SVG Gaussian blur that is expensive at full-viewport size (measured: ~700 ms of
@@ -43,7 +43,7 @@ export function ResortImage({
       fetchPriority={aboveTheFold ? "high" : "auto"}
       quality={quality}
       placeholder={aboveTheFold ? "empty" : "blur"}
-      className={cx("bg-sand object-cover", className)}
+      className={cx("bg-mist object-cover", className)}
     />
   );
 }

@@ -25,10 +25,13 @@ export function Testimonials({ testimonials }: { testimonials: readonly Testimon
         {testimonials.map((testimonial) => (
           <li key={testimonial.id} className="flex reveal">
             <figure className="flex w-full flex-col border border-line bg-white p-7 sm:p-9">
-              <span aria-hidden="true" className="-mb-3 font-serif text-6xl leading-none text-gold">
+              <span
+                aria-hidden="true"
+                className="-mb-3 font-serif text-6xl leading-none font-semibold text-gold"
+              >
                 “
               </span>
-              <blockquote className="mt-2 font-serif text-[1.375rem] leading-snug text-forest-900">
+              <blockquote className="mt-2 font-serif text-[1.375rem] leading-snug font-medium text-forest-900">
                 <p>{testimonial.quote}</p>
               </blockquote>
               <figcaption className="mt-auto flex flex-wrap items-end justify-between gap-3 pt-8 text-sm">

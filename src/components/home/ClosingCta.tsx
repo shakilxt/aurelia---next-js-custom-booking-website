@@ -8,16 +8,16 @@ export function ClosingCta({ image }: { image: MediaAsset }) {
     <section
       aria-labelledby="closing-cta"
       data-surface="dark"
-      className="relative isolate overflow-hidden bg-forest-900 text-ivory"
+      className="relative isolate overflow-hidden bg-forest-900 text-shell"
     >
       <ResortImage asset={image} fill sizes="100vw" className="-z-20" />
       <div aria-hidden="true" className="absolute inset-0 -z-10 bg-forest-900/65" />
       <Container className="flex min-h-[32rem] reveal flex-col items-center justify-center py-24 text-center lg:min-h-[38rem]">
-        <p className="text-eyebrow font-medium text-ivory/90 uppercase">Plan your stay</p>
+        <p className="text-eyebrow font-medium text-shell/90 uppercase">Plan your stay</p>
         <h2 id="closing-cta" className="mt-5 max-w-3xl text-h1">
           Slow down, by the lagoon
         </h2>
-        <p className="mt-6 max-w-xl text-lead text-ivory/85">
+        <p className="mt-6 max-w-xl text-lead text-shell/85">
           Choose a residence, your dates and your party to see an estimated total in moments. It’s a
           demonstration, so nothing is reserved.
         </p>

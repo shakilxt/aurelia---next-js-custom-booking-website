@@ -38,7 +38,7 @@ export function GalleryBrowser({ items }: GalleryBrowserProps) {
             {filters.map((filter) => (
               <label
                 key={filter.label}
-                className="inline-flex h-11 cursor-pointer items-center rounded-sm border border-line-strong px-4 text-sm transition-colors select-none hover:border-forest-800 has-checked:border-forest-800 has-checked:bg-forest-800 has-checked:text-ivory has-focus-visible:outline-2 has-focus-visible:outline-offset-2 has-focus-visible:outline-(--focus-ring)"
+                className="inline-flex h-11 cursor-pointer items-center rounded-sm border border-line-strong px-4 text-sm transition-colors select-none hover:border-forest-800 has-checked:border-forest-800 has-checked:bg-forest-800 has-checked:text-shell has-focus-visible:outline-2 has-focus-visible:outline-offset-2 has-focus-visible:outline-(--focus-ring)"
               >
                 <input
                   type="radio"
@@ -65,7 +65,7 @@ export function GalleryBrowser({ items }: GalleryBrowserProps) {
               type="button"
               onClick={() => setOpenIndex(index)}
               aria-label={`View larger: ${item.asset.alt}`}
-              className="group relative block w-full overflow-hidden bg-sand focus-visible:outline-offset-4"
+              className="group relative block w-full overflow-hidden bg-mist focus-visible:outline-offset-4"
             >
               <ResortImage
                 asset={item.asset}
@@ -74,7 +74,7 @@ export function GalleryBrowser({ items }: GalleryBrowserProps) {
               />
               <span
                 aria-hidden="true"
-                className="absolute right-3 bottom-3 inline-flex size-9 items-center justify-center rounded-full bg-forest-900/70 text-ivory opacity-0 transition-opacity group-hover:opacity-100 group-focus-visible:opacity-100"
+                className="absolute right-3 bottom-3 inline-flex size-9 items-center justify-center rounded-full bg-forest-900/70 text-shell opacity-0 transition-opacity group-hover:opacity-100 group-focus-visible:opacity-100"
               >
                 <Expand className="size-4" strokeWidth={1.5} />
               </span>
