@@ -69,7 +69,7 @@
 
 /* Font families are provided as CSS variables by next/font (see src/app/fonts.ts). */
 @theme inline {
-  --font-serif: var(--font-cormorant), "Cormorant Garamond", Georgia, "Times New Roman", serif;
+  --font-serif: var(--font-gambetta), "Gambetta", Georgia, "Times New Roman", serif;
   --font-sans: var(--font-dm-sans), "DM Sans", ui-sans-serif, system-ui, sans-serif;
 }
 

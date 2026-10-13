@@ -13,7 +13,7 @@ import reefCoastAerialSrc from "@/assets/images/coast/reef-coast-aerial.jpg";
 import shoreSunsetSrc from "@/assets/images/coast/shore-sunset.jpg";
 import quietCoveSrc from "@/assets/images/coast/quiet-cove.jpg";
 import beachPalmsSrc from "@/assets/images/coast/beach-palms.jpg";
-import lagoonVillaDeckSrc from "@/assets/images/stays/lagoon-villa-deck.jpg";
+import lagoonVillaPoolSrc from "@/assets/images/stays/lagoon-villa-pool.jpg";
 import lagoonVillaBedroomSrc from "@/assets/images/stays/lagoon-villa-bedroom.jpg";
 import lagoonVillaBathSrc from "@/assets/images/stays/lagoon-villa-bath.jpg";
 import groveVillaPoolSrc from "@/assets/images/stays/grove-villa-pool.jpg";
@@ -36,8 +36,8 @@ import beachBungalowPoolSrc from "@/assets/images/stays/beach-bungalow-pool.jpg"
 import privateDiningSrc from "@/assets/images/experiences/private-dining.jpg";
 import floatingBreakfastSrc from "@/assets/images/experiences/floating-breakfast.jpg";
 import chefPlateSrc from "@/assets/images/experiences/chef-plate.jpg";
-import spaHotStoneSrc from "@/assets/images/experiences/spa-hot-stone.jpg";
-import spaMassageSrc from "@/assets/images/experiences/spa-massage.jpg";
+import spaTreatmentRoomSrc from "@/assets/images/experiences/spa-treatment-room.jpg";
+import spaFlowerBathSrc from "@/assets/images/experiences/spa-flower-bath.jpg";
 import snorkelTurtleSrc from "@/assets/images/experiences/snorkel-turtle.jpg";
 import reefGardenSrc from "@/assets/images/experiences/reef-garden.jpg";
 import sailingSrc from "@/assets/images/experiences/sailing.jpg";
@@ -118,10 +118,10 @@ export const media = {
   ),
 
   // stays
-  lagoonVillaDeck: asset(
-    "lagoon-villa-deck",
-    lagoonVillaDeckSrc,
-    "A timber deck with loungers beside an infinity pool that meets the lagoon under shade trees",
+  lagoonVillaPool: asset(
+    "lagoon-villa-pool",
+    lagoonVillaPoolSrc,
+    "An infinity pool at dusk mirroring palms and an overwater pavilion as it meets the lagoon",
   ),
   lagoonVillaBedroom: asset(
     "lagoon-villa-bedroom",
@@ -181,7 +181,7 @@ export const media = {
   reefSuitePool: asset(
     "reef-suite-pool",
     reefSuitePoolSrc,
-    "A guest in a sun hat resting in an infinity pool overlooking the beach and an overwater jetty",
+    "An infinity pool on a white-roofed terrace above a palm-dotted beach and a turquoise bay",
   ),
   horizonSuiteTerrace: asset(
     "horizon-suite-terrace",
@@ -216,7 +216,7 @@ export const media = {
   beachBungalowPool: asset(
     "beach-bungalow-pool",
     beachBungalowPoolSrc,
-    "A timber beach house with a steep roof beside a pool lined with cushioned loungers",
+    "Thatched, white-walled bungalows around a curved pool with cushioned loungers",
   ),
 
   // experiences
@@ -235,15 +235,15 @@ export const media = {
     chefPlateSrc,
     "A plated fish course served at a candlelit dinner table",
   ),
-  spaHotStone: asset(
-    "spa-hot-stone",
-    spaHotStoneSrc,
-    "A hot stone massage with dark basalt stones and white orchids along a guest's back",
+  spaTreatmentRoom: asset(
+    "spa-treatment-room",
+    spaTreatmentRoomSrc,
+    "A spa treatment bed laid with rolled towels, a basket of dark basalt stones and a palm frond",
   ),
-  spaMassage: asset(
-    "spa-massage",
-    spaMassageSrc,
-    "A therapist pouring warm oil during a relaxing massage",
+  spaFlowerBath: asset(
+    "spa-flower-bath",
+    spaFlowerBathSrc,
+    "A stone bath strewn with flower petals beside a tray of oils and rolled towels",
   ),
   snorkelTurtle: asset(
     "snorkel-turtle",

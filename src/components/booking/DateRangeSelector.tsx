@@ -8,6 +8,7 @@ import { Button } from "@/components/ui/Button";
 import { Dialog } from "@/components/ui/Dialog";
 import { FieldError } from "@/components/ui/form/FieldError";
 import { cx } from "@/lib/cx";
+import { stayRules } from "@/data/pricing";
 import { formatDate, nightsBetween } from "@/lib/dates";
 import { useToday } from "./useToday";
 
@@ -35,7 +36,9 @@ const RangeCalendar = dynamic(loadCalendar, {
 
 function rangeSummary({ checkIn, checkOut }: DateSelection) {
   if (!checkIn) return "Select a check-in date.";
-  if (!checkOut) return `Check-in ${formatDate(checkIn)}. Now select a check-out date.`;
+  if (!checkOut) {
+    return `Check-in ${formatDate(checkIn, "short")}. Now select check-out, up to ${stayRules.maxNights} nights later.`;
+  }
   const nights = nightsBetween(checkIn, checkOut);
   return `${nights} ${nights === 1 ? "night" : "nights"} · ${formatDate(checkIn, "short")} – ${formatDate(checkOut, "short")}`;
 }

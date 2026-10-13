@@ -20,7 +20,7 @@ export const experiences = [
     name: "Spa and wellness rituals",
     description:
       "Warm basalt stones, coconut oils and slow, unhurried treatments in open-air pavilions above the lagoon.",
-    image: media.spaHotStone,
+    image: media.spaTreatmentRoom,
     category: "wellness",
     durationLabel: "60 to 120 minutes",
     displayOrder: 2,

@@ -43,7 +43,7 @@ lightbox.
 - Next.js 16 (App Router, Turbopack, typed routes) · React 19 · TypeScript 5.9 (strict, with
   `noUncheckedIndexedAccess`)
 - Tailwind CSS 4 with CSS-first design tokens (`src/app/globals.css`)
-- `next/font` (Cormorant Garamond, DM Sans), lucide-react, react-day-picker 10
+- `next/font` (Gambetta, DM Sans), lucide-react, react-day-picker 10
 - Vitest (unit) · Playwright + axe-core (end-to-end and accessibility) · Prettier · ESLint
 
 Runtime dependencies are deliberately minimal: `next`, `react`, `react-dom`, `lucide-react` and
@@ -58,18 +58,19 @@ npm install
 npm run dev          # http://localhost:3000
 ```
 
-| Command             | Purpose                                                   |
-| ------------------- | --------------------------------------------------------- |
-| `npm run dev`       | Development server                                        |
-| `npm run build`     | Production build                                          |
-| `npm run start`     | Serve the production build                                |
-| `npm run typecheck` | Generate route types and run `tsc --noEmit`               |
-| `npm run lint`      | ESLint (`eslint-config-next`)                             |
-| `npm run format`    | Prettier (with Tailwind class sorting)                    |
-| `npm run test`      | Vitest unit tests                                         |
-| `npm run test:e2e`  | Playwright suite (builds and serves the app first)        |
-| `npm run check`     | Typecheck, lint, format check and unit tests              |
-| `npm run images`    | Re-download and grade photography from the image manifest |
+| Command             | Purpose                                                       |
+| ------------------- | ------------------------------------------------------------- |
+| `npm run dev`       | Development server                                            |
+| `npm run build`     | Production build                                              |
+| `npm run start`     | Serve the production build                                    |
+| `npm run typecheck` | Generate route types and run `tsc --noEmit`                   |
+| `npm run lint`      | ESLint (`eslint-config-next`)                                 |
+| `npm run format`    | Prettier (with Tailwind class sorting)                        |
+| `npm run test`      | Vitest unit tests                                             |
+| `npm run test:e2e`  | Playwright suite (builds and serves the app first)            |
+| `npm run check`     | Typecheck, lint, format check and unit tests                  |
+| `npm run images`    | Re-download and grade photography from the image manifest     |
+| `npm run fonts`     | Fetch the Gambetta font files (runs before `dev` and `build`) |
 
 Run `npx playwright install chromium` once before the first end-to-end run. To use an existing
 Chromium build instead, set `PLAYWRIGHT_CHROMIUM_EXECUTABLE=/path/to/chrome`.
@@ -215,18 +216,25 @@ the Unsplash API so far (matched by image ID, also recorded in the manifest):
 | -------------------------------- | ------------------------------------------------------- | --------------------------------------------------------------------------------------------------------------------------- |
 | `coast/shore-sunset`             | [Cristofer Maximilian](https://unsplash.com/@cristofer) | [View on Unsplash](https://unsplash.com/photos/beach-seashore-during-sunset-uQDRDqpYJHI)                                    |
 | `experiences/floating-breakfast` | [Rayyu Maldives](https://unsplash.com/@rayyu)           | [View on Unsplash](https://unsplash.com/photos/floating-breakfast-trays-in-turquoise-pool-yWFF1xkULew)                      |
-| `experiences/spa-massage`        | [alan caishan](https://unsplash.com/@caishan119)        | [View on Unsplash](https://unsplash.com/photos/woman-lying-with-prone-position-cU53ZFBr3lk)                                 |
+| `experiences/spa-flower-bath`    | [Raajit Sharma](https://unsplash.com/@raajit)           | [View on Unsplash](https://unsplash.com/photos/a-bath-room-with-a-bath-tub-and-a-tray-of-flowers-7Q1Jwr5BhgI)               |
+| `experiences/spa-treatment-room` | [Doan Anh](https://unsplash.com/@b07sgn)                | [View on Unsplash](https://unsplash.com/photos/a-basket-of-food-on-a-table-guinijRsKbs)                                     |
 | `resort/cabanas-dusk`            | [Saad Khan](https://unsplash.com/@sakhan88)             | [View on Unsplash](https://unsplash.com/photos/resort-viewing-blue-sea-under-blue-and-white-sky-during-daytime-425b2PhNuHA) |
 | `resort/lagoon-aerial`           | [Thomas Stadler](https://unsplash.com/@thomasstadler)   | [View on Unsplash](https://unsplash.com/photos/aerial-view-of-white-and-gray-boat-on-sea-during-daytime-LFRUK7mslpk)        |
+| `stays/beach-bungalow-pool`      | [Ron Fijian](https://unsplash.com/@ronfajilan123)       | [View on Unsplash](https://unsplash.com/photos/luxury-resort-with-pool-and-thatched-roof-bungalows-S-CIlXHTJY0)             |
 | `stays/garden-bungalow-thatch`   | [Kelsey Curtis](https://unsplash.com/@kelseycurtis)     | [View on Unsplash](https://unsplash.com/photos/thatch-huts-and-houses-by-the-pool-during-day--27u_GzlAFw)                   |
+| `stays/lagoon-villa-pool`        | [Amar Hussain](https://unsplash.com/@gapyearescape)     | [View on Unsplash](https://unsplash.com/photos/a-large-swimming-pool-surrounded-by-palm-trees-ZKvi9r4yzQw)                  |
+| `stays/reef-suite-pool`          | [Rosemary Media](https://unsplash.com/@rosemarymedia)   | [View on Unsplash](https://unsplash.com/photos/infinity-pool-overlooking-tropical-beach-TKtTW6z0uAA)                        |
 | `stays/residence-pavilion`       | [Roberto Nickson](https://unsplash.com/@rpnickson)      | [View on Unsplash](https://unsplash.com/photos/chairs-near-pool-EeeKjwm2vDo)                                                |
 
 The remaining photographers can be matched the same way; the API's demo rate limit (50 requests
 an hour) stopped this pass early.
 
-Cormorant Garamond and DM Sans are licensed under the SIL Open Font License (licences in
-`src/assets/fonts`). Pages load them through `next/font`; the social card uses the bundled
-static instances.
+Headings and prices use Gambetta from [Fontshare](https://www.fontshare.com/fonts/gambetta),
+free for commercial use under the ITF Free Font License (`src/assets/fonts/FFL-Gambetta.txt`).
+That licence allows self-hosting but not redistributing the font files, so they are gitignored
+and `npm run fonts` downloads them, unmodified, before `dev` and `build`. Body text uses DM Sans
+under the SIL Open Font License (`src/assets/fonts/OFL-DMSans.txt`). Pages load both through
+`next/font`, and the social card uses static TTF instances.
 
 ## Scope and future work
 

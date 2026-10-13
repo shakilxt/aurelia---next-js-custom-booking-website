@@ -46,6 +46,14 @@ const calendarClassNames: Partial<ClassNames> = {
   hidden: "invisible",
 };
 
+/*
+ * react-day-picker marks a lone check-in only as `selected` (range_start needs both
+ * ends), so this modifier gives it the same filled style while check-out is pending.
+ */
+const modifiersClassNames = {
+  checkInOnly: "[&>button]:bg-forest-800 [&>button]:text-ivory [&>button]:hover:bg-forest-900",
+};
+
 /**
  * The range calendar itself, split from `DateRangeSelector` so react-day-picker loads
  * only when a visitor opens the dates dialog. Because it can arrive after the dialog
@@ -62,6 +70,12 @@ export default function RangeCalendar({ checkIn, checkOut, today, onChange }: Ra
   const selected: DateRange | undefined = checkIn
     ? { from: isoToLocalDate(checkIn), to: checkOut ? isoToLocalDate(checkOut) : undefined }
     : undefined;
+  // While check-out is being chosen, days past the longest stay are disabled. Otherwise a
+  // click there silently starts a new range, which reads as the calendar ignoring it.
+  const choosingCheckOut = checkIn !== null && checkOut === null;
+  const lastCheckOut = choosingCheckOut
+    ? isoToLocalDate(addDays(checkIn, stayRules.maxNights))
+    : null;
 
   useEffect(() => {
     rootRef.current?.querySelector<HTMLElement>('[role="grid"] button[tabindex="0"]')?.focus();
@@ -82,7 +96,13 @@ export default function RangeCalendar({ checkIn, checkOut, today, onChange }: Ra
         max={stayRules.maxNights}
         resetOnSelect
         excludeDisabled
-        disabled={[{ before: isoToLocalDate(today) }, { after: lastBookableDay }]}
+        disabled={[
+          { before: isoToLocalDate(today) },
+          { after: lastBookableDay },
+          ...(lastCheckOut ? [{ after: lastCheckOut }] : []),
+        ]}
+        modifiers={{ checkInOnly: choosingCheckOut ? isoToLocalDate(checkIn) : undefined }}
+        modifiersClassNames={modifiersClassNames}
         numberOfMonths={wide ? 2 : 1}
         startMonth={isoToLocalDate(today)}
         endMonth={lastBookableDay}
