@@ -1,23 +1,14 @@
 "use client";
 
-import { useId, useState, useSyncExternalStore } from "react";
-import { DayPicker, type ClassNames, type DateRange } from "react-day-picker";
+import { useId, useState } from "react";
+import dynamic from "next/dynamic";
 import { CalendarDays } from "lucide-react";
 import type { IsoDate } from "@/types/common";
-import { stayRules } from "@/data/pricing";
 import { Button } from "@/components/ui/Button";
 import { Dialog } from "@/components/ui/Dialog";
 import { FieldError } from "@/components/ui/form/FieldError";
-import { latestCheckIn } from "@/lib/booking";
 import { cx } from "@/lib/cx";
-import {
-  addDays,
-  compareIsoDates,
-  formatDate,
-  isoToLocalDate,
-  localDateToIso,
-  nightsBetween,
-} from "@/lib/dates";
+import { formatDate, nightsBetween } from "@/lib/dates";
 import { useToday } from "./useToday";
 
 export interface DateSelection {
@@ -32,38 +23,15 @@ interface DateRangeSelectorProps extends DateSelection {
   errors?: { checkIn?: string; checkOut?: string };
 }
 
-const WIDE_QUERY = "(min-width: 48rem)";
-const subscribeWide = (onChange: () => void) => {
-  const query = window.matchMedia(WIDE_QUERY);
-  query.addEventListener("change", onChange);
-  return () => query.removeEventListener("change", onChange);
-};
-
-const calendarClassNames: Partial<ClassNames> = {
-  root: "relative",
-  months: "flex flex-col gap-8 md:flex-row md:gap-10",
-  month: "w-full",
-  month_caption: "flex h-11 items-center justify-center",
-  caption_label: "font-serif text-xl text-forest-900",
-  nav: "pointer-events-none absolute inset-x-0 top-0 z-10 flex h-11 items-center justify-between",
-  button_previous:
-    "pointer-events-auto inline-flex size-11 items-center justify-center rounded-sm hover:bg-sand-light aria-disabled:opacity-30 aria-disabled:hover:bg-transparent",
-  button_next:
-    "pointer-events-auto inline-flex size-11 items-center justify-center rounded-sm hover:bg-sand-light aria-disabled:opacity-30 aria-disabled:hover:bg-transparent",
-  chevron: "size-4 fill-forest-900",
-  month_grid: "mt-3 w-full border-collapse",
-  weekday: "pb-2 text-xs font-medium text-muted",
-  day: "p-0 text-center",
-  day_button:
-    "mx-auto flex size-10 items-center justify-center rounded-sm text-sm transition-colors hover:bg-sand disabled:cursor-not-allowed disabled:text-charcoal/30 disabled:hover:bg-transparent sm:size-11",
-  today: "font-semibold text-forest-900",
-  range_start:
-    "bg-sand [&>button]:bg-forest-800 [&>button]:text-ivory [&>button]:hover:bg-forest-900",
-  range_end:
-    "bg-sand [&>button]:bg-forest-800 [&>button]:text-ivory [&>button]:hover:bg-forest-900",
-  range_middle: "bg-sand [&>button]:rounded-none",
-  hidden: "invisible",
-};
+const loadCalendar = () => import("./RangeCalendar");
+const RangeCalendar = dynamic(loadCalendar, {
+  ssr: false,
+  loading: () => (
+    <p role="status" className="flex min-h-80 items-center justify-center text-sm text-muted">
+      Loading calendar…
+    </p>
+  ),
+});
 
 function rangeSummary({ checkIn, checkOut }: DateSelection) {
   if (!checkIn) return "Select a check-in date.";
@@ -74,7 +42,8 @@ function rangeSummary({ checkIn, checkOut }: DateSelection) {
 
 /**
  * Check-in and check-out fields that open an accessible range calendar. The calendar
- * renders only on the client after opening, so "today" never comes from the server.
+ * renders only on the client after opening, so "today" never comes from the server,
+ * and its code is fetched on demand (see `RangeCalendar`).
  */
 export function DateRangeSelector({
   id: idProp,
@@ -85,17 +54,8 @@ export function DateRangeSelector({
 }: DateRangeSelectorProps) {
   const [open, setOpen] = useState(false);
   const today = useToday();
-  const wide = useSyncExternalStore(
-    subscribeWide,
-    () => window.matchMedia(WIDE_QUERY).matches,
-    () => false,
-  );
   const generatedId = useId();
   const id = idProp ?? generatedId;
-
-  const selected: DateRange | undefined = checkIn
-    ? { from: isoToLocalDate(checkIn), to: checkOut ? isoToLocalDate(checkOut) : undefined }
-    : undefined;
 
   const fields = [
     { key: "checkIn", label: "Check-in", value: checkIn, error: errors.checkIn },
@@ -114,6 +74,9 @@ export function DateRangeSelector({
             aria-describedby={field.error ? `${id}-${field.key}-error` : undefined}
             data-field={field.key}
             onClick={() => setOpen(true)}
+            // Start fetching the calendar as soon as intent is likely.
+            onPointerEnter={loadCalendar}
+            onFocus={loadCalendar}
             className={cx(
               "flex min-h-16 flex-col items-start justify-center px-4 py-3 text-left transition-colors hover:bg-sand-light",
               field.error && "outline-2 -outline-offset-2 outline-danger",
@@ -148,7 +111,6 @@ export function DateRangeSelector({
         open={open}
         onClose={() => setOpen(false)}
         title="Select your dates"
-        initialFocus='[role="grid"] button[tabindex="0"]'
         footer={
           <div className="flex flex-wrap items-center justify-between gap-3">
             <p aria-live="polite" className="text-sm text-muted">
@@ -168,31 +130,7 @@ export function DateRangeSelector({
         }
       >
         {today ? (
-          <DayPicker
-            mode="range"
-            selected={selected}
-            onSelect={(range) =>
-              onChange({
-                checkIn: range?.from ? localDateToIso(range.from) : null,
-                checkOut: range?.to ? localDateToIso(range.to) : null,
-              })
-            }
-            min={stayRules.minNights}
-            max={stayRules.maxNights}
-            resetOnSelect
-            excludeDisabled
-            disabled={[
-              { before: isoToLocalDate(today) },
-              { after: isoToLocalDate(addDays(latestCheckIn(today), stayRules.maxNights)) },
-            ]}
-            numberOfMonths={wide ? 2 : 1}
-            startMonth={isoToLocalDate(today)}
-            endMonth={isoToLocalDate(addDays(latestCheckIn(today), stayRules.maxNights))}
-            defaultMonth={isoToLocalDate(
-              checkIn && compareIsoDates(checkIn, today) >= 0 ? checkIn : today,
-            )}
-            classNames={calendarClassNames}
-          />
+          <RangeCalendar checkIn={checkIn} checkOut={checkOut} today={today} onChange={onChange} />
         ) : null}
       </Dialog>
     </div>

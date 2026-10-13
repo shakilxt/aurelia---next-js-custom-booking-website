@@ -9,11 +9,6 @@ interface DialogProps {
   title: string;
   children: ReactNode;
   footer?: ReactNode;
-  /**
-   * Element to focus after opening, as a selector within the dialog. Defaults to the
-   * browser's behaviour (the first focusable element, i.e. the close button).
-   */
-  initialFocus?: string;
 }
 
 /**
@@ -21,7 +16,7 @@ interface DialogProps {
  * inert background, Escape to close and focus return to the opener. Renders as a
  * bottom sheet on small screens and a centred panel above that.
  */
-export function Dialog({ open, onClose, title, children, footer, initialFocus }: DialogProps) {
+export function Dialog({ open, onClose, title, children, footer }: DialogProps) {
   const ref = useRef<HTMLDialogElement>(null);
   const titleId = useId();
 
@@ -29,12 +24,12 @@ export function Dialog({ open, onClose, title, children, footer, initialFocus }:
     const dialog = ref.current;
     if (!dialog) return;
     if (open && !dialog.open) {
+      // Focus goes to the first focusable element; content may move it once mounted.
       dialog.showModal();
-      if (initialFocus) dialog.querySelector<HTMLElement>(initialFocus)?.focus();
     } else if (!open && dialog.open) {
       dialog.close();
     }
-  }, [open, initialFocus]);
+  }, [open]);
 
   return (
     <dialog

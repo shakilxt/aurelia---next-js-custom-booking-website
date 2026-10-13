@@ -1,3 +1,4 @@
+import type { Metadata } from "next";
 import { ClosingCta } from "@/components/home/ClosingCta";
 import { ExperiencesPreview } from "@/components/home/ExperiencesPreview";
 import { FeaturedStays } from "@/components/home/FeaturedStays";
@@ -13,6 +14,9 @@ import { media } from "@/data/media";
 import { testimonials } from "@/data/testimonials";
 import { getAllExperiences } from "@/lib/experiences";
 import { getAllStays, getFeaturedStays } from "@/lib/stays";
+
+// Set here rather than in the layout, so routes without their own canonical don't inherit "/".
+export const metadata: Metadata = { alternates: { canonical: "/" } };
 
 export default function HomePage() {
   const stays = getAllStays();

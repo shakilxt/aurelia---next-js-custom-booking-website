@@ -13,18 +13,24 @@ interface ResortImageProps {
    * priority (Next.js 16 deprecates the `priority` prop in favour of these).
    */
   aboveTheFold?: boolean;
+  /** Encoder quality; must be listed in `images.qualities` in next.config.ts. */
+  quality?: 60 | 75;
   className?: string;
 }
 
 /**
- * Photography wrapper. A sand-coloured surface and blur placeholder sit behind every
- * image, so slow or failed loads degrade to a calm block rather than a broken icon.
+ * Photography wrapper. A sand-coloured surface sits behind every image, so slow or
+ * failed loads degrade to a calm block rather than a broken icon. Lazy images also get
+ * a blur placeholder; above-the-fold images skip it, because next/image paints it as an
+ * SVG Gaussian blur that is expensive at full-viewport size (measured: ~700 ms of
+ * main-thread time on the hero without GPU raster), and they arrive quickly anyway.
  */
 export function ResortImage({
   asset,
   sizes,
   fill = false,
   aboveTheFold = false,
+  quality = 75,
   className,
 }: ResortImageProps) {
   return (
@@ -35,7 +41,8 @@ export function ResortImage({
       fill={fill}
       loading={aboveTheFold ? "eager" : "lazy"}
       fetchPriority={aboveTheFold ? "high" : "auto"}
-      placeholder="blur"
+      quality={quality}
+      placeholder={aboveTheFold ? "empty" : "blur"}
       className={cx("bg-sand object-cover", className)}
     />
   );

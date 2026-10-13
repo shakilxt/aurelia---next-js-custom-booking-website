@@ -26,6 +26,8 @@ export function Hero({ image }: HeroProps) {
         asset={image}
         fill
         aboveTheFold
+        // Under dark scrims, a lower quality is visually lossless and saves ~25% on phones.
+        quality={60}
         sizes="(max-aspect-ratio: 3/2) 150vh, 100vw"
         className="-z-20"
       />

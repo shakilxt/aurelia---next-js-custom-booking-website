@@ -1,6 +1,7 @@
 import type { Metadata, Viewport } from "next";
 import type { ReactNode } from "react";
 import { site } from "@/data/site";
+import { baseOpenGraph } from "@/lib/metadata";
 import { getSiteUrl } from "@/lib/site-url";
 import { SiteHeader } from "@/components/layout/SiteHeader";
 import { SiteFooter } from "@/components/layout/SiteFooter";
@@ -14,9 +15,7 @@ export const metadata: Metadata = {
   description: site.description,
   applicationName: site.name,
   openGraph: {
-    type: "website",
-    locale: "en_US",
-    siteName: site.name,
+    ...baseOpenGraph,
     title: site.title,
     description: site.description,
   },
