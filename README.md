@@ -208,7 +208,7 @@ Every image has been checked at full size for logos, watermarks and recognisable
 because a fictional resort must not borrow a real one's identity. Repeat that check when adding
 photos.
 
-The site credits Unsplash in the footer and on the gallery page. Photographers confirmed through
+The gallery page credits Unsplash. Photographers confirmed through
 the Unsplash API so far (matched by image ID, also recorded in the manifest):
 
 | Image                            | Photographer                                            | Source                                                                                                                      |
