@@ -6,6 +6,8 @@ import {
   compareIsoDates,
   formatDate,
   formatDateRange,
+  isoToLocalDate,
+  localDateToIso,
   nightsBetween,
   parseIsoDate,
   todayIso,
@@ -117,5 +119,15 @@ describe("formatting", () => {
   it("brands only validated values", () => {
     const value: IsoDate | null = parseIsoDate("2026-11-02");
     expect(value).not.toBeNull();
+  });
+});
+
+describe("calendar widget conversion", () => {
+  it("round-trips through a local noon Date", () => {
+    for (const value of ["2026-03-08", "2026-11-01", "2028-02-29", "2026-12-31"]) {
+      const local = isoToLocalDate(d(value));
+      expect(local.getHours()).toBe(12);
+      expect(localDateToIso(local)).toBe(value);
+    }
   });
 });

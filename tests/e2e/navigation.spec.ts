@@ -123,7 +123,7 @@ test.describe("mobile navigation", () => {
 test("no route scrolls horizontally at common widths", async ({ page }) => {
   for (const width of [375, 768, 1024]) {
     await page.setViewportSize({ width, height: 900 });
-    for (const route of [...staticRoutes, "/missing-page"]) {
+    for (const route of [...staticRoutes, "/missing-page", "/stays/aurelia-residence"]) {
       await page.goto(route);
       const overflow = await page.evaluate(
         () => document.documentElement.scrollWidth - document.documentElement.clientWidth,
