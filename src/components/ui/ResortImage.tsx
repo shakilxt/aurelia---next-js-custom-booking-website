@@ -8,8 +8,11 @@ interface ResortImageProps {
   sizes: string;
   /** Fills a positioned parent; otherwise the intrinsic aspect ratio is used. */
   fill?: boolean;
-  /** Only for the largest above-the-fold image on a page. */
-  priority?: boolean;
+  /**
+   * For the largest above-the-fold image on a page: loads eagerly with high fetch
+   * priority (Next.js 16 deprecates the `priority` prop in favour of these).
+   */
+  aboveTheFold?: boolean;
   className?: string;
 }
 
@@ -21,7 +24,7 @@ export function ResortImage({
   asset,
   sizes,
   fill = false,
-  priority = false,
+  aboveTheFold = false,
   className,
 }: ResortImageProps) {
   return (
@@ -30,7 +33,8 @@ export function ResortImage({
       alt={asset.alt}
       sizes={sizes}
       fill={fill}
-      priority={priority}
+      loading={aboveTheFold ? "eager" : "lazy"}
+      fetchPriority={aboveTheFold ? "high" : "auto"}
       placeholder="blur"
       className={cx("bg-sand object-cover", className)}
     />

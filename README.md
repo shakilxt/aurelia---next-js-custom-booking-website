@@ -48,10 +48,33 @@ src/
   app/          Routes, root layout, global styles and design tokens
   components/   layout/ (header, navigation, footer) · ui/ (primitives) · feature folders
   data/         Typed local mock data and site configuration
-  lib/          Pure utilities (metadata, class names, …)
+  assets/       Bundled photography
+  lib/          Pure domain logic and utilities, with colocated unit tests
   types/        Domain types
 tests/e2e/      Playwright specs
 ```
+
+## Photography
+
+All photographs are free-licence images from [Unsplash](https://unsplash.com/license), bundled
+locally in `src/assets/images` so the site never depends on a remote image host at runtime.
+`scripts/images.manifest.json` records the source of every file. `npm run images` re-downloads
+any missing file and applies one shared colour grade so photos from different photographers sit
+together (pass `-- --force` to regenerate everything; behind an HTTP proxy, set
+`NODE_USE_ENV_PROXY=1`).
+
+## Domain logic
+
+Pure, unit-tested modules in `src/lib`:
+
+- `dates` — calendar dates as `YYYY-MM-DD` strings with UTC arithmetic, so night counts and
+  display never shift with time zones or daylight saving. Unit tests run in UTC+14 to catch
+  accidental local-time maths.
+- `pricing` / `money` — estimates in integer minor units (cents) with explicitly configured fees
+  (`src/data/pricing.ts`); totals are always recomputed, never read from the URL.
+- `booking` — date, stay-length and capacity rules for a selection.
+- `stay-query` / `booking-params` — tolerant parsing and stable serialisation of URL state.
+- `validation` — guest-details and enquiry form rules.
 
 ## Configuration
 
