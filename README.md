@@ -63,6 +63,10 @@ any missing file and applies one shared colour grade so photos from different ph
 together (pass `-- --force` to regenerate everything; behind an HTTP proxy, set
 `NODE_USE_ENV_PROXY=1`).
 
+Every image has been checked at full size for logos, watermarks and recognisable brand marks,
+because a fictional resort must not borrow a real one's identity. Repeat that check when adding
+photos.
+
 ## Domain logic
 
 Pure, unit-tested modules in `src/lib`:
@@ -89,6 +93,16 @@ component is `BookingSearch`.
 - Entrance animations use CSS scroll-driven animations (the `reveal` utility). They need no
   JavaScript and are skipped when reduced motion is preferred or the browser lacks support.
 - Guest notes are fictional. The section and each note are visibly labelled as demo content.
+
+## Gallery and contact
+
+- The gallery filters by category and opens a lightbox built on the native `<dialog>`, which
+  provides focus containment, Escape to close and focus return. Arrow keys and swipes move
+  between photos, and the caption is a live region that announces each change.
+- `/contact` is a static page. Links from `/experiences` add `?experience=<slug>`, which
+  prefills the message on the client. The enquiry form follows the booking form's rules: no
+  native submit before hydration, no storage, and an in-page acknowledgement that says nothing
+  was sent.
 
 ## Booking simulation
 

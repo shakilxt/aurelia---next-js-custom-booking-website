@@ -22,7 +22,6 @@ import groveVillaVerandaSrc from "@/assets/images/stays/grove-villa-veranda.jpg"
 import residencePoolSrc from "@/assets/images/stays/residence-pool.jpg";
 import residencePavilionSrc from "@/assets/images/stays/residence-pavilion.jpg";
 import overwaterSuiteExteriorSrc from "@/assets/images/stays/overwater-suite-exterior.jpg";
-import overwaterSuiteInteriorSrc from "@/assets/images/stays/overwater-suite-interior.jpg";
 import overwaterSuiteJettySrc from "@/assets/images/stays/overwater-suite-jetty.jpg";
 import reefSuiteAerialSrc from "@/assets/images/stays/reef-suite-aerial.jpg";
 import reefSuiteClusterSrc from "@/assets/images/stays/reef-suite-cluster.jpg";
@@ -163,11 +162,6 @@ export const media = {
     "overwater-suite-exterior",
     overwaterSuiteExteriorSrc,
     "Thatched overwater suites and a boardwalk over clear water as the sun rises",
-  ),
-  overwaterSuiteInterior: asset(
-    "overwater-suite-interior",
-    overwaterSuiteInteriorSrc,
-    "A rounded overwater lounge with floor-to-ceiling windows framing a private deck and the lagoon",
   ),
   overwaterSuiteJetty: asset(
     "overwater-suite-jetty",

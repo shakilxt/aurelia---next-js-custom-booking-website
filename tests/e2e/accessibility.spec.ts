@@ -2,6 +2,10 @@ import AxeBuilder from "@axe-core/playwright";
 import { expect, test, type Page } from "@playwright/test";
 import { staticRoutes } from "./routes";
 
+// Scan the settled page: scroll-driven entrance fades would otherwise be sampled
+// mid-animation. Visitors who prefer reduced motion get exactly this state.
+test.use({ contextOptions: { reducedMotion: "reduce" } });
+
 const tags = ["wcag2a", "wcag2aa", "wcag21a", "wcag21aa", "wcag22aa"];
 
 async function expectNoViolations(page: Page) {
@@ -58,5 +62,29 @@ test("the demo confirmation has no detectable WCAG A/AA violations", async ({ pa
   await page.getByLabel("Email").fill("kai@example.com");
   await page.getByRole("button", { name: "Submit demo booking" }).click();
   await expect(page.getByRole("heading", { level: 1, name: "Thank you, Kai" })).toBeVisible();
+  await expectNoViolations(page);
+});
+
+test("the gallery lightbox has no detectable WCAG A/AA violations", async ({ page }) => {
+  await page.goto("/gallery");
+  await page
+    .getByRole("button", { name: /^View larger:/ })
+    .first()
+    .click();
+  await expect(page.getByRole("dialog", { name: "Photo viewer" })).toBeVisible();
+  await expectNoViolations(page);
+});
+
+test("the contact form states have no detectable WCAG A/AA violations", async ({ page }) => {
+  await page.goto("/contact");
+  await page.getByRole("button", { name: "Send demo enquiry" }).click();
+  await expect(page.getByText("Some details need attention")).toBeVisible();
+  await expectNoViolations(page);
+
+  await page.getByLabel("Full name").fill("Kai Moana");
+  await page.getByLabel("Email").fill("kai@example.com");
+  await page.getByLabel("Message").fill("A question about arrival times.");
+  await page.getByRole("button", { name: "Send demo enquiry" }).click();
+  await expect(page.getByRole("heading", { name: "Thank you, Kai" })).toBeVisible();
   await expectNoViolations(page);
 });

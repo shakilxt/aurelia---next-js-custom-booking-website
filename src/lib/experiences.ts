@@ -11,3 +11,12 @@ export const experienceCategoryLabels: Record<ExperienceCategory, string> = {
 export function getAllExperiences(): Experience[] {
   return [...experiences].sort((a, b) => a.displayOrder - b.displayOrder);
 }
+
+export function getExperienceBySlug(slug: string): Experience | undefined {
+  return experiences.find((experience) => experience.slug === slug);
+}
+
+/** Message used to prefill the contact form from an experience's call to action. */
+export function experienceEnquiry(experience: Pick<Experience, "name">): string {
+  return `I’d like to arrange ${experience.name.toLowerCase()} during my stay.`;
+}
