@@ -12,6 +12,7 @@ import { AmenityList } from "@/components/stays/AmenityList";
 import { StayFacts } from "@/components/stays/StayFacts";
 import { Container } from "@/components/ui/Container";
 import { SectionHeading } from "@/components/ui/SectionHeading";
+import { baseOpenGraph } from "@/lib/metadata";
 import { categoryLabels, getRelatedStays, getStayBySlug } from "@/lib/stays";
 
 // Only slugs from the dataset exist; anything else is a 404.
@@ -30,6 +31,7 @@ export async function generateMetadata({ params }: PageProps<"/stays/[slug]">): 
     description: stay.shortDescription,
     alternates: { canonical: path },
     openGraph: {
+      ...baseOpenGraph,
       title: stay.name,
       description: stay.shortDescription,
       url: path,

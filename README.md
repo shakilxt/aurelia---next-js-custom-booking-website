@@ -1,19 +1,53 @@
 # AURELIA — Luxury Tropical Resort & Retreats
 
-A design-first frontend portfolio project: a fictional island resort in the South Pacific with
-accommodation discovery and a simulated booking flow. See [`PROJECT_SPEC.md`](./PROJECT_SPEC.md)
-for the full specification.
+A design-led frontend portfolio project: a fictional island resort in the South Pacific with
+accommodation discovery and a fully simulated booking flow. Built with Next.js 16, React 19,
+TypeScript and Tailwind CSS 4. See [`PROJECT_SPEC.md`](./PROJECT_SPEC.md) for the brief.
 
 > **Demonstration only.** AURELIA is fictional. Prices, availability and guest notes are
-> illustrative. No reservations, payments or enquiries are created or transmitted.
+> illustrative. No reservations, payments or enquiries are created, stored or transmitted.
+
+![AURELIA homepage on desktop](docs/screenshots/home-desktop.jpg)
+
+<table>
+  <tr>
+    <td><img src="docs/screenshots/home-mobile.jpg" alt="Homepage hero on a phone" width="260"></td>
+    <td><img src="docs/screenshots/booking-panel-mobile.jpg" alt="Booking panel with dates, guests and an itemised estimate on a phone" width="260"></td>
+    <td><img src="docs/screenshots/errors-mobile.jpg" alt="Booking form error summary on a phone" width="260"></td>
+  </tr>
+</table>
+
+More screens are in [`docs/screenshots`](docs/screenshots): the stays listing with carried-over
+dates, a residence page, the date picker, the booking form and confirmation, and the gallery
+lightbox.
+
+## Features
+
+- **Stays** (`/stays`): filter by residence type, party size and nightly rate, and sort.
+  All filter state lives in the URL, so results are shareable and survive reload and Back.
+  Dates from the homepage search carry through the listing to every residence.
+- **Residence pages** (`/stays/[slug]`): photo gallery, facts and amenities, related stays,
+  and a booking panel. The panel has an accessible range calendar, guest steppers that respect
+  capacity, and an itemised estimate.
+- **Booking simulation** (`/book`): choose a residence, edit dates and guests, enter guest
+  details, then get an in-page confirmation with a clearly labelled `AUR-DEMO-…` reference.
+- **Experiences, gallery, about, contact**: an editorial experiences list whose calls to action
+  prefill an enquiry; a filterable gallery with a keyboard and swipe lightbox; concept copy for
+  the story and sustainable design; and a validated demo enquiry form.
+- **Production details**: canonical URLs, Open Graph and Twitter cards (a generated default card,
+  and each residence's own photo), sitemap, robots rules that keep preview deployments out of
+  search results, web manifest, icons and baseline security headers.
 
 ## Stack
 
-- Next.js 16 (App Router, Turbopack, typed routes) · React 19 · TypeScript 5.9 (strict)
+- Next.js 16 (App Router, Turbopack, typed routes) · React 19 · TypeScript 5.9 (strict, with
+  `noUncheckedIndexedAccess`)
 - Tailwind CSS 4 with CSS-first design tokens (`src/app/globals.css`)
-- `next/font` (Cormorant Garamond, DM Sans) — self-hosted at build time
-- lucide-react icons
-- Vitest (unit) · Playwright + axe-core (end-to-end and accessibility)
+- `next/font` (Cormorant Garamond, DM Sans), lucide-react, react-day-picker 10
+- Vitest (unit) · Playwright + axe-core (end-to-end and accessibility) · Prettier · ESLint
+
+Runtime dependencies are deliberately minimal: `next`, `react`, `react-dom`, `lucide-react` and
+`react-day-picker`. There is no state library, UI kit or animation library.
 
 ## Getting started
 
@@ -24,107 +58,172 @@ npm install
 npm run dev          # http://localhost:3000
 ```
 
-## Scripts
-
-| Command             | Purpose                                            |
-| ------------------- | -------------------------------------------------- |
-| `npm run dev`       | Development server                                 |
-| `npm run build`     | Production build                                   |
-| `npm run start`     | Serve the production build                         |
-| `npm run typecheck` | Generate route types and run `tsc --noEmit`        |
-| `npm run lint`      | ESLint (`eslint-config-next`)                      |
-| `npm run format`    | Prettier (with Tailwind class sorting)             |
-| `npm run test`      | Vitest unit tests                                  |
-| `npm run test:e2e`  | Playwright suite (builds and serves the app first) |
-| `npm run check`     | Typecheck, lint, format check and unit tests       |
+| Command             | Purpose                                                   |
+| ------------------- | --------------------------------------------------------- |
+| `npm run dev`       | Development server                                        |
+| `npm run build`     | Production build                                          |
+| `npm run start`     | Serve the production build                                |
+| `npm run typecheck` | Generate route types and run `tsc --noEmit`               |
+| `npm run lint`      | ESLint (`eslint-config-next`)                             |
+| `npm run format`    | Prettier (with Tailwind class sorting)                    |
+| `npm run test`      | Vitest unit tests                                         |
+| `npm run test:e2e`  | Playwright suite (builds and serves the app first)        |
+| `npm run check`     | Typecheck, lint, format check and unit tests              |
+| `npm run images`    | Re-download and grade photography from the image manifest |
 
 Run `npx playwright install chromium` once before the first end-to-end run. To use an existing
 Chromium build instead, set `PLAYWRIGHT_CHROMIUM_EXECUTABLE=/path/to/chrome`.
 
-## Project structure
+### Deployment
+
+The project deploys to Vercel with no configuration: import the repository and deploy. The
+canonical base URL comes from `NEXT_PUBLIC_SITE_URL` if set, otherwise from Vercel's production
+domain (`VERCEL_PROJECT_PRODUCTION_URL`), otherwise `http://localhost:3000`. Preview deployments
+serve a `robots.txt` that disallows crawling.
+
+## Architecture
 
 ```
 src/
-  app/          Routes, root layout, global styles and design tokens
-  components/   layout/ (header, navigation, footer) · ui/ (primitives) · feature folders
+  app/          Routes, metadata files (OG image, sitemap, robots, manifest, icons), tokens
+  components/   layout/ · ui/ (primitives, form fields) · booking/ · stays/ · home/ · gallery/ …
   data/         Typed local mock data and site configuration
-  assets/       Bundled photography
-  lib/          Pure domain logic and utilities, with colocated unit tests
-  types/        Domain types
-tests/e2e/      Playwright specs
+  lib/          Pure domain logic with colocated unit tests
+  types/        Domain types, shaped so they could map to database tables later
+  assets/       Bundled photography and the fonts used by the social card
+tests/e2e/      Playwright specs (routes, flows, accessibility, SEO, runtime health)
+scripts/        Image pipeline and its manifest
 ```
 
-## Photography
+**Server first.** Pages are Server Components. Client components are limited to what needs
+state or browser APIs: the header's scroll state, the mobile menu, filters, the date picker,
+forms and the lightbox. Data stays on the server. For example, the residence image in the
+booking summary is rendered on the server and passed into the client flow as a slot.
+
+**The URL as state, but never for personal data.** Filters, dates and guest counts are parsed
+tolerantly (malformed values are dropped, never thrown) and serialised in a stable order. The
+booking flow mirrors its selection with `history.replaceState`. Names, emails and messages
+exist only in component state.
+
+**Static where possible.** Residence pages are pre-rendered with `generateStaticParams`, and
+their booking panels read the query string on the client inside a Suspense boundary, so the
+pages stay static. `/contact` uses the same pattern for its prefilled message. Only `/stays`
+and `/book` render on demand, because they read search params on the server.
+
+### Domain logic (`src/lib`)
+
+- `dates`: calendar dates as `YYYY-MM-DD` strings with UTC arithmetic, so night counts and
+  display never shift with time zones or daylight saving. "Today" is read from the visitor's
+  clock on the client only. Unit tests run in UTC+14 to catch accidental local-time maths.
+- `pricing` / `money`: estimates in integer minor units (cents) with explicitly configured fees
+  (`src/data/pricing.ts`: a 10% service charge and a per-guest island transfer). Percentage
+  fees are rounded once, and totals are always recomputed, never read from the URL.
+- `booking`: check-in window (18 months), stay length (1–30 nights) and capacity rules, where
+  children count towards capacity.
+- `stay-query` / `booking-params`: URL parsing and serialisation.
+- `validation`: guest-details and enquiry rules, with trimming and helpful messages.
+- `demo-reference`: unbiased random `AUR-DEMO-XXXXXX` codes from an alphabet without
+  look-alike characters, generated on submit rather than during render.
+
+## Accessibility
+
+- Semantic landmarks, one `h1` per page, a skip link and visible focus rings. Text and control
+  contrast is checked against the tokens, which is why `muted` is darker than the brief's
+  starting value.
+- Dialogs (mobile menu, date picker, lightbox) use the native `<dialog>` for focus containment,
+  Escape to close and focus return. The page doesn't scroll behind them.
+- Forms use `noValidate` with labelled controls, `aria-invalid`, `aria-describedby` and an
+  error summary that takes focus and links to each field. Steppers use `aria-disabled` at their
+  limits, so focus isn't lost.
+- Motion is limited to CSS scroll-driven reveals and transitions, all disabled under
+  `prefers-reduced-motion`.
+- Pages, dialogs and form states are scanned with axe (WCAG 2.2 A/AA) in the end-to-end suite.
+
+## Privacy and security
+
+- No secrets, no external APIs and no remote images at runtime. Photography and fonts are
+  bundled.
+- Personal data is never written to the URL, cookies or storage, and the tests assert this.
+  Form submit buttons stay disabled until hydration, so a native submit can never put details
+  into a query string.
+- No payment fields anywhere. Every booking and enquiry surface carries a demo notice.
+- Contact details are clearly fictional: an `.example` domain and a 555-01xx phone number.
+- Response headers set `X-Content-Type-Options`, `X-Frame-Options`, `Referrer-Policy`,
+  `Permissions-Policy` and a CSP covering `frame-ancestors`, `base-uri`, `form-action` and
+  `object-src`. A full script CSP is left out on purpose: Next.js inlines bootstrap scripts,
+  so a meaningful policy needs per-request nonces, which would make every page dynamic.
+
+## Testing
+
+`npm run check` runs typecheck, lint, format check and 104 unit tests. `npm run test:e2e` runs
+the Playwright suite in a desktop (1440×900) and a mobile (Pixel 7) project. It covers:
+
+- every route, navigation and the 404 page;
+- filters, sorting and URL persistence;
+- the booking panel, flow and confirmation;
+- contact validation and acknowledgement;
+- the gallery lightbox;
+- behaviour without JavaScript;
+- no horizontal overflow at common widths;
+- metadata, sitemap, robots and headers;
+- zero console errors or failed requests on every page;
+- axe scans of pages and interactive states.
+
+## Performance
+
+Measured with Lighthouse 12.8.2 against `next start` in headless Chromium on a cloud container,
+using the default mobile preset (simulated slow 4G, 4× CPU slowdown) unless noted. Scores vary
+between machines and runs; re-measure on the deployed site.
+
+| Page                                  | Performance | Accessibility | Best practices | SEO |
+| ------------------------------------- | ----------- | ------------- | -------------- | --- |
+| `/` mobile (median of 3; range 84–92) | 88          | 100           | 100            | 100 |
+| `/` desktop preset                    | 100         | 100           | 100            | 100 |
+| `/stays`                              | 97          | 100           | 100            | 100 |
+| `/stays/lagoon-pool-villa`            | 95          | 100           | 100            | 100 |
+| `/book?stay=lagoon-pool-villa`        | 98          | 100           | 100            | 100 |
+| `/gallery`                            | 91          | 100           | 100            | 100 |
+| `/contact`                            | 99          | 100           | 100            | 100 |
+
+Cumulative layout shift is 0 on every page measured. Two findings from profiling are now built
+in:
+
+- `next/image` draws blur placeholders as an SVG Gaussian blur, which cost about 700 ms of
+  main-thread time behind the full-screen hero. Above-the-fold images now skip it, and lazy
+  images keep it.
+- The date-picker library is loaded on demand when a date field is hovered or focused, so it
+  is no longer in the homepage bundle.
+
+The hero is also served at quality 60, where its scrims hide compression.
+
+## Photography and fonts
 
 All photographs are free-licence images from [Unsplash](https://unsplash.com/license), bundled
-locally in `src/assets/images` so the site never depends on a remote image host at runtime.
-`scripts/images.manifest.json` records the source of every file. `npm run images` re-downloads
-any missing file and applies one shared colour grade so photos from different photographers sit
-together (pass `-- --force` to regenerate everything; behind an HTTP proxy, set
-`NODE_USE_ENV_PROXY=1`).
+locally in `src/assets/images`. `scripts/images.manifest.json` records the source of every file.
+`npm run images` re-downloads any missing file and applies one shared colour grade so photos from
+different photographers sit together. Pass `-- --force` to regenerate everything; behind an HTTP
+proxy, set `NODE_USE_ENV_PROXY=1`.
 
 Every image has been checked at full size for logos, watermarks and recognisable brand marks,
 because a fictional resort must not borrow a real one's identity. Repeat that check when adding
-photos.
+photos. Photographer names are not yet listed; they can be added to the manifest with the
+Unsplash API.
 
-## Domain logic
+Cormorant Garamond and DM Sans are licensed under the SIL Open Font License (licences in
+`src/assets/fonts`). Pages load them through `next/font`; the social card uses the bundled
+static instances.
 
-Pure, unit-tested modules in `src/lib`:
+## Scope and future work
 
-- `dates` — calendar dates as `YYYY-MM-DD` strings with UTC arithmetic, so night counts and
-  display never shift with time zones or daylight saving. Unit tests run in UTC+14 to catch
-  accidental local-time maths.
-- `pricing` / `money` — estimates in integer minor units (cents) with explicitly configured fees
-  (`src/data/pricing.ts`); totals are always recomputed, never read from the URL.
-- `booking` — date, stay-length and capacity rules for a selection.
-- `stay-query` / `booking-params` — tolerant parsing and stable serialisation of URL state.
-- `validation` — guest-details and enquiry form rules.
+This release is frontend only: local typed mock data, simulated booking and client-side
+validation. A production version would need:
 
-## Homepage and search
+- server-side validation;
+- real availability with transactional reservations;
+- payments through a compliant provider;
+- authentication and secure sessions;
+- database authorisation policies;
+- rate limiting;
+- a privacy policy and consent handling.
 
-The homepage is made of server-rendered sections in `src/components/home`. The only client
-component is `BookingSearch`.
-
-- Guests and residence type filter `/stays`. Dates don't filter, because there is no
-  inventory to check. They are kept in the listing URL and carried to each residence's
-  booking panel along with the party size.
-- The search selects have `name` attributes and the form has `action="/stays"`. If
-  JavaScript hasn't loaded, a native GET still filters the listing.
-- Entrance animations use CSS scroll-driven animations (the `reveal` utility). They need no
-  JavaScript and are skipped when reduced motion is preferred or the browser lacks support.
-- Guest notes are fictional. The section and each note are visibly labelled as demo content.
-
-## Gallery and contact
-
-- The gallery filters by category and opens a lightbox built on the native `<dialog>`, which
-  provides focus containment, Escape to close and focus return. Arrow keys and swipes move
-  between photos, and the caption is a live region that announces each change.
-- `/contact` is a static page. Links from `/experiences` add `?experience=<slug>`, which
-  prefills the message on the client. The enquiry form follows the booking form's rules: no
-  native submit before hydration, no storage, and an in-page acknowledgement that says nothing
-  was sent.
-
-## Booking simulation
-
-`/book` runs in three steps: choose a residence, add dates, guests and guest details, then see
-an in-page confirmation.
-
-- Only the stay, dates and guest counts travel in the URL, and edits are mirrored with
-  `history.replaceState`. Names, emails and requests stay in component state. They are never
-  written to the URL, cookies or storage, and a refresh clears them.
-- The submit button stays disabled until hydration, so a pre-JavaScript native submit can't
-  put form values into a query string.
-- A failed submit focuses an error summary that links to each field. Fields use
-  `aria-invalid` and `aria-describedby`.
-- The confirmation states that no reservation was made. Its `AUR-DEMO-…` reference is
-  generated on submit and labelled as a demo identifier. There are no payment fields.
-
-## Configuration
-
-`NEXT_PUBLIC_SITE_URL` sets the canonical base URL for metadata. On Vercel the production
-domain is detected automatically; locally it falls back to `http://localhost:3000`.
-
-## Scope
-
-Frontend only: local typed mock data, simulated booking behaviour and client-side validation.
-There is no payment processing, database, authentication or external booking API.
+The domain types in `src/types` were shaped with that mapping in mind.
