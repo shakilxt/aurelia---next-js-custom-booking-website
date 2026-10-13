@@ -40,7 +40,6 @@ export function BookingPanel({ stay, initial = {} }: BookingPanelProps) {
   const router = useRouter();
   const today = useToday();
   const headingId = useId();
-  const guestsErrorId = useId();
   const panelRef = useRef<HTMLElement>(null);
 
   const [dates, setDates] = useState<DateSelection>({
@@ -108,7 +107,6 @@ export function BookingPanel({ stay, initial = {} }: BookingPanelProps) {
           capacity={stay.capacity}
           onChange={setGuests}
           error={errors.guests}
-          errorId={guestsErrorId}
         />
         <div aria-live="polite">
           {estimate ? (

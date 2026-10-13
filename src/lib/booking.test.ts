@@ -1,6 +1,12 @@
 import { describe, expect, it } from "vitest";
 import { parseIsoDate } from "./dates";
-import { guestLimits, latestCheckIn, validateStaySelection } from "./booking";
+import {
+  formatGuestCount,
+  guestLimits,
+  initialGuestCount,
+  latestCheckIn,
+  validateStaySelection,
+} from "./booking";
 import type { IsoDate } from "@/types/common";
 
 const d = (value: string) => parseIsoDate(value) as IsoDate;
@@ -89,5 +95,28 @@ describe("guestLimits", () => {
 
   it("always allows at least one adult", () => {
     expect(guestLimits(2, { adults: 1, children: 2 }).maxAdults).toBe(1);
+  });
+});
+
+describe("initialGuestCount", () => {
+  it("defaults to two adults, or fewer for a smaller residence", () => {
+    expect(initialGuestCount(4)).toEqual({ adults: 2, children: 0 });
+    expect(initialGuestCount(1)).toEqual({ adults: 1, children: 0 });
+  });
+
+  it("keeps requested counts, even above capacity, so validation can report them", () => {
+    expect(initialGuestCount(2, { adults: 3, children: 1 })).toEqual({ adults: 3, children: 1 });
+  });
+
+  it("never starts below one adult or zero children", () => {
+    expect(initialGuestCount(4, { adults: 0, children: -2 })).toEqual({ adults: 1, children: 0 });
+  });
+});
+
+describe("formatGuestCount", () => {
+  it("pluralises and omits zero children", () => {
+    expect(formatGuestCount({ adults: 1, children: 0 })).toBe("1 adult");
+    expect(formatGuestCount({ adults: 2, children: 1 })).toBe("2 adults, 1 child");
+    expect(formatGuestCount({ adults: 2, children: 3 })).toBe("2 adults, 3 children");
   });
 });

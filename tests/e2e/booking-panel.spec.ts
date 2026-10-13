@@ -41,6 +41,10 @@ test.describe("booking panel", () => {
     await expect(page).toHaveURL(
       `/book?stay=lagoon-pool-villa&checkIn=${checkIn}&checkOut=${checkOut}&adults=2&children=0`,
     );
+    // /book re-derives the same estimate from the selection rather than from the URL.
+    await expect(
+      page.getByRole("complementary", { name: "Booking summary" }).getByText("$5,860"),
+    ).toBeVisible();
   });
 
   test("selects a range in the calendar", async ({ page }) => {

@@ -82,3 +82,28 @@ export function validateStaySelection(
     errors,
   );
 }
+
+/**
+ * Guest counts to start from: values from the URL when present, otherwise two adults
+ * (or fewer, for a smaller residence). Counts are not clamped to capacity here, so an
+ * oversized party surfaces as a validation error instead of being silently changed.
+ */
+export function initialGuestCount(
+  capacity: number,
+  requested: Partial<GuestCount> = {},
+): GuestCount {
+  return {
+    adults: Math.max(requested.adults ?? Math.min(2, capacity), 1),
+    children: Math.max(requested.children ?? 0, 0),
+  };
+}
+
+const countLabel = (count: number, one: string, many: string) =>
+  `${count} ${count === 1 ? one : many}`;
+
+/** "2 adults", or "2 adults, 1 child". */
+export function formatGuestCount({ adults, children }: GuestCount): string {
+  const parts = [countLabel(adults, "adult", "adults")];
+  if (children > 0) parts.push(countLabel(children, "child", "children"));
+  return parts.join(", ");
+}

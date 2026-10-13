@@ -7,6 +7,7 @@ import type { IsoDate } from "@/types/common";
 import { stayRules } from "@/data/pricing";
 import { Button } from "@/components/ui/Button";
 import { Dialog } from "@/components/ui/Dialog";
+import { FieldError } from "@/components/ui/form/FieldError";
 import { latestCheckIn } from "@/lib/booking";
 import { cx } from "@/lib/cx";
 import {
@@ -25,6 +26,8 @@ export interface DateSelection {
 }
 
 interface DateRangeSelectorProps extends DateSelection {
+  /** Base id; the triggers become `${id}-checkIn` and `${id}-checkOut`. */
+  id?: string;
   onChange: (selection: DateSelection) => void;
   errors?: { checkIn?: string; checkOut?: string };
 }
@@ -74,6 +77,7 @@ function rangeSummary({ checkIn, checkOut }: DateSelection) {
  * renders only on the client after opening, so "today" never comes from the server.
  */
 export function DateRangeSelector({
+  id: idProp,
   checkIn,
   checkOut,
   onChange,
@@ -86,7 +90,8 @@ export function DateRangeSelector({
     () => window.matchMedia(WIDE_QUERY).matches,
     () => false,
   );
-  const id = useId();
+  const generatedId = useId();
+  const id = idProp ?? generatedId;
 
   const selected: DateRange | undefined = checkIn
     ? { from: isoToLocalDate(checkIn), to: checkOut ? isoToLocalDate(checkOut) : undefined }
@@ -104,6 +109,7 @@ export function DateRangeSelector({
           <button
             key={field.key}
             type="button"
+            id={`${id}-${field.key}`}
             aria-haspopup="dialog"
             aria-describedby={field.error ? `${id}-${field.key}-error` : undefined}
             data-field={field.key}
@@ -132,9 +138,9 @@ export function DateRangeSelector({
       </div>
       {fields.map((field) =>
         field.error ? (
-          <p key={field.key} id={`${id}-${field.key}-error`} className="mt-2 text-sm text-danger">
+          <FieldError key={field.key} id={`${id}-${field.key}-error`}>
             {field.error}
-          </p>
+          </FieldError>
         ) : null,
       )}
 

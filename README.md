@@ -76,6 +76,21 @@ Pure, unit-tested modules in `src/lib`:
 - `stay-query` / `booking-params` — tolerant parsing and stable serialisation of URL state.
 - `validation` — guest-details and enquiry form rules.
 
+## Booking simulation
+
+`/book` runs in three steps: choose a residence, add dates, guests and guest details, then see
+an in-page confirmation.
+
+- Only the stay, dates and guest counts travel in the URL, and edits are mirrored with
+  `history.replaceState`. Names, emails and requests stay in component state. They are never
+  written to the URL, cookies or storage, and a refresh clears them.
+- The submit button stays disabled until hydration, so a pre-JavaScript native submit can't
+  put form values into a query string.
+- A failed submit focuses an error summary that links to each field. Fields use
+  `aria-invalid` and `aria-describedby`.
+- The confirmation states that no reservation was made. Its `AUR-DEMO-…` reference is
+  generated on submit and labelled as a demo identifier. There are no payment fields.
+
 ## Configuration
 
 `NEXT_PUBLIC_SITE_URL` sets the canonical base URL for metadata. On Vercel the production
