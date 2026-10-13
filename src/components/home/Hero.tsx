@@ -4,7 +4,7 @@ import { Container } from "@/components/ui/Container";
 import { ResortImage } from "@/components/ui/ResortImage";
 
 interface HeroProps {
-  image?: MediaAsset;
+  image: MediaAsset;
 }
 
 const stayTypes = ["Pool villas", "Ocean suites", "Garden bungalows"] as const;
@@ -21,7 +21,14 @@ export function Hero({ image }: HeroProps) {
       aria-labelledby="hero-title"
       className="relative isolate -mt-(--header-h) flex min-h-[max(40rem,100svh)] items-end overflow-hidden bg-forest-900 text-ivory"
     >
-      {image ? <ResortImage asset={image} fill priority sizes="100vw" className="-z-20" /> : null}
+      {/* The 3:2 photo covers the hero, so narrow/tall viewports render it wider than 100vw. */}
+      <ResortImage
+        asset={image}
+        fill
+        aboveTheFold
+        sizes="(max-aspect-ratio: 3/2) 150vh, 100vw"
+        className="-z-20"
+      />
       {/* Functional scrims: keep the header and headline legible on any photograph. */}
       <div
         aria-hidden="true"
@@ -29,12 +36,17 @@ export function Hero({ image }: HeroProps) {
       />
       <div
         aria-hidden="true"
-        className="absolute inset-x-0 bottom-0 -z-10 h-[70%] bg-linear-to-t from-forest-900/85 via-forest-900/40 to-transparent"
+        className="absolute inset-y-0 left-0 -z-10 hidden w-3/4 bg-linear-to-r from-forest-900/60 via-forest-900/25 to-transparent lg:block"
+      />
+      <div
+        aria-hidden="true"
+        className="absolute inset-x-0 bottom-0 -z-10 h-[80%] bg-linear-to-t from-forest-900/90 via-forest-900/55 to-transparent"
       />
 
       <Container className="grid gap-12 pt-40 pb-14 sm:pb-20 lg:grid-cols-12 lg:items-end lg:pb-24">
         <div className="lg:col-span-8">
-          <p className="text-eyebrow font-medium text-gold uppercase">
+          <p className="flex items-center gap-4 text-eyebrow font-medium text-ivory/90 uppercase">
+            <span aria-hidden="true" className="h-px w-10 bg-gold" />
             Concept resort · South Pacific
           </p>
           <h1 id="hero-title" className="mt-6 max-w-4xl text-display">

@@ -8,7 +8,7 @@ export default defineConfig({
   test: {
     include: ["src/**/*.test.ts"],
     environment: "node",
-    // Domain unit tests arrive in Phase 2.
-    passWithNoTests: true,
+    // UTC+14: date code that accidentally uses local time shifts by a day here and fails.
+    env: { TZ: "Pacific/Kiritimati" },
   },
 });
