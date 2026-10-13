@@ -1,0 +1,198 @@
+@import "tailwindcss";
+
+/*
+ * Design tokens.
+ *
+ * The default Tailwind palette, radius and shadow scales are cleared so that only
+ * brand tokens are available. Contrast ratios (WCAG 2.x) were checked for each
+ * text/background pairing; see the notes beside the tokens.
+ */
+@theme {
+  --color-*: initial;
+  --color-white: #ffffff;
+
+  /* Primary actions, strong accents and dark surfaces. */
+  --color-forest-900: #102c25; /* ivory on forest-900: 13.8:1 */
+  --color-forest-800: #183d32; /* forest-800 on ivory: 11.1:1 — white on forest-800: 12.0:1 */
+  --color-forest-700: #22503f;
+
+  /* Content surfaces. */
+  --color-ivory: #f8f6f0;
+  --color-sand: #e8dfd0;
+  --color-sand-light: #f1ece3;
+
+  /* Gold is decorative on light surfaces (2.5:1 on ivory). Use gold-ink for small text there. */
+  --color-gold: #b49a68; /* gold on forest-900: 5.5:1 */
+  --color-gold-ink: #7a6440; /* gold-ink on ivory: 5.2:1 */
+
+  /* Text. The spec's #747A73 measured 4.07:1 on ivory, so muted text is darkened. */
+  --color-charcoal: #252a27; /* 13.5:1 on ivory */
+  --color-muted: #5f655e; /* 5.5:1 on ivory, 4.5:1 on sand */
+
+  /* Borders: `line` is decorative; `line-strong` meets 3:1 for form-control boundaries. */
+  --color-line: #ddd5c6;
+  --color-line-strong: #878b83;
+
+  /* Status. Always paired with text or an icon, never colour alone. */
+  --color-danger: #9b2c22; /* 7.0:1 on ivory */
+
+  /* Fluid type scale for headings; body copy uses Tailwind's default sizes. */
+  --text-display: clamp(3rem, 1.9rem + 4.6vw, 6.75rem);
+  --text-display--line-height: 0.98;
+  --text-display--letter-spacing: -0.015em;
+  --text-h1: clamp(2.5rem, 1.85rem + 2.7vw, 4.5rem);
+  --text-h1--line-height: 1.04;
+  --text-h1--letter-spacing: -0.01em;
+  --text-h2: clamp(2rem, 1.6rem + 1.75vw, 3.25rem);
+  --text-h2--line-height: 1.1;
+  --text-h3: clamp(1.5rem, 1.32rem + 0.75vw, 2rem);
+  --text-h3--line-height: 1.2;
+  --text-eyebrow: 0.75rem;
+  --text-eyebrow--line-height: 1.4;
+  --text-eyebrow--letter-spacing: 0.22em;
+  --text-lead: clamp(1.0625rem, 1rem + 0.3vw, 1.25rem);
+  --text-lead--line-height: 1.65;
+
+  --container-site: 84rem;
+  --container-narrow: 44rem;
+
+  --radius-*: initial;
+  --radius-xs: 1px;
+  --radius-sm: 2px;
+  --radius-md: 4px;
+
+  --shadow-*: initial;
+  --shadow-soft: 0 1px 2px rgb(16 44 37 / 0.04), 0 12px 32px -16px rgb(16 44 37 / 0.22);
+
+  --ease-out-soft: cubic-bezier(0.22, 1, 0.36, 1);
+}
+
+/* Font families are provided as CSS variables by next/font (see src/app/fonts.ts). */
+@theme inline {
+  --font-serif: var(--font-cormorant), "Cormorant Garamond", Georgia, "Times New Roman", serif;
+  --font-sans: var(--font-dm-sans), "DM Sans", ui-sans-serif, system-ui, sans-serif;
+}
+
+/* Section rhythm shared by every page. */
+@utility section-y {
+  padding-block: clamp(4.5rem, 3rem + 6vw, 9rem);
+}
+
+@layer base {
+  :root {
+    --header-h: 4.5rem;
+    --focus-ring: var(--color-forest-800);
+  }
+
+  @media (min-width: 64rem) {
+    :root {
+      --header-h: 5.25rem;
+    }
+  }
+
+  html {
+    color-scheme: light;
+    scrollbar-gutter: stable;
+    scroll-padding-top: calc(var(--header-h) + 1rem);
+    -webkit-text-size-adjust: 100%;
+  }
+
+  body {
+    @apply bg-ivory font-sans text-charcoal antialiased;
+    text-rendering: optimizeLegibility;
+  }
+
+  h1,
+  h2,
+  h3,
+  h4 {
+    @apply font-serif font-normal text-balance;
+  }
+
+  p {
+    text-wrap: pretty;
+  }
+
+  ::selection {
+    @apply bg-forest-800 text-ivory;
+  }
+
+  /* Dark surfaces switch the focus ring to a light colour so it stays visible. */
+  [data-surface="dark"] {
+    --focus-ring: var(--color-ivory);
+  }
+
+  :focus-visible {
+    outline: 2px solid var(--focus-ring);
+    outline-offset: 3px;
+  }
+
+  /* Lock page scrolling while a modal dialog (e.g. the mobile menu) is open. */
+  html:has(dialog:modal) {
+    overflow: hidden;
+  }
+
+  @media (prefers-reduced-motion: reduce) {
+    *,
+    *::before,
+    *::after {
+      animation-duration: 0.01ms !important;
+      animation-iteration-count: 1 !important;
+      transition-duration: 0.01ms !important;
+      scroll-behavior: auto !important;
+    }
+  }
+}
+
+/*
+ * Site header states.
+ *
+ * Pages that open with a full-bleed photographic hero mark it with
+ * `data-header-overlay`; until the visitor scrolls, the header sits transparently
+ * over that hero. This is resolved in CSS from server-rendered markup, so the
+ * header never flashes between states on load.
+ */
+@custom-variant header-overlay {
+  :where(html:has([data-header-overlay])) :where([data-site-header]:not([data-scrolled])) & {
+    @slot;
+  }
+}
+
+@layer components {
+  /* Slide-in sheet built on the native <dialog> element. */
+  .sheet {
+    translate: 100% 0;
+    transition:
+      translate 0.45s var(--ease-out-soft),
+      overlay 0.45s allow-discrete,
+      display 0.45s allow-discrete;
+  }
+
+  .sheet[open] {
+    translate: 0 0;
+  }
+
+  @starting-style {
+    .sheet[open] {
+      translate: 100% 0;
+    }
+  }
+
+  .sheet::backdrop {
+    background-color: rgb(16 44 37 / 0);
+    transition:
+      background-color 0.45s var(--ease-out-soft),
+      overlay 0.45s allow-discrete,
+      display 0.45s allow-discrete;
+  }
+
+  .sheet[open]::backdrop {
+    background-color: rgb(16 44 37 / 0.55);
+  }
+
+  @starting-style {
+    .sheet[open]::backdrop {
+      background-color: rgb(16 44 37 / 0);
+    }
+  }
+}
