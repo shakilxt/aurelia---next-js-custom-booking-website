@@ -15,11 +15,13 @@ export function SiteHeader() {
     <HeaderFrame>
       <div
         className={cx(
-          "border-b border-line bg-ivory text-forest-900 transition-colors duration-300",
+          // The bar's height includes its border, so it is exactly --header-h tall and the
+          // home hero, pulled up by --header-h, meets the top of the viewport with no gap.
+          "h-(--header-h) border-b border-line bg-ivory text-forest-900 transition-colors duration-300",
           "header-overlay:border-ivory/20 header-overlay:bg-transparent header-overlay:text-ivory",
         )}
       >
-        <Container className="flex h-(--header-h) items-center justify-between gap-6">
+        <Container className="flex h-full items-center justify-between gap-6">
           <Link href="/" className="font-serif text-2xl tracking-[0.32em] lg:text-[1.75rem]">
             {site.name}
             <span className="sr-only"> — home</span>

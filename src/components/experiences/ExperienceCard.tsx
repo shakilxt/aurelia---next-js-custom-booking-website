@@ -26,9 +26,10 @@ export function ExperienceCard({
       <Heading className="mt-2 text-[1.75rem] leading-tight text-forest-900">
         {experience.name}
       </Heading>
-      <p className="mt-3 text-muted">{experience.description}</p>
+      <p className="mt-3 mb-4 text-muted">{experience.description}</p>
       {experience.durationLabel ? (
-        <p className="mt-4 flex items-center gap-2 text-sm text-charcoal">
+        // mt-auto pins the duration to the card's foot, level across a row of cards.
+        <p className="mt-auto flex items-center gap-2 text-sm text-charcoal">
           <Clock aria-hidden="true" className="size-4 text-gold-ink" strokeWidth={1.5} />
           {experience.durationLabel}
         </p>

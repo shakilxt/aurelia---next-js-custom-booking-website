@@ -15,7 +15,7 @@ export const accommodations = [
       "A timber-decked villa whose infinity pool appears to spill straight into the lagoon.",
     description:
       "Set at the quiet western edge of the island, the Lagoon Pool Villa opens entirely to the water. Sliding timber screens fold back to join the bedroom, deck and pool into one shaded space, while a stone bathroom with a freestanding tub looks onto a private planted courtyard. Mornings begin with coffee on the deck as the tide turns; evenings end with the lagoon going silver under the moon.",
-    images: [media.lagoonVillaDeck, media.lagoonVillaBedroom, media.lagoonVillaBath],
+    images: [media.lagoonVillaPool, media.lagoonVillaBedroom, media.lagoonVillaBath],
     capacity: 3,
     bedrooms: 1,
     bathrooms: 1,

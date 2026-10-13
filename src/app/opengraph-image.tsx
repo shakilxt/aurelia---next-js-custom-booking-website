@@ -12,16 +12,17 @@ export const contentType = "image/jpeg";
 const asset = (path: string) => readFile(join(process.cwd(), "src/assets", path));
 
 /**
- * Default social card, rendered once at build time. Static font instances are bundled
- * in src/assets/fonts (SIL OFL) because Satori cannot use next/font or WOFF2 files,
- * and layout uses explicit offsets because Satori ignores the `inset` shorthand.
+ * Default social card, rendered once at build time. Static TTF instances live in
+ * src/assets/fonts (DM Sans is bundled; Gambetta is fetched by `npm run fonts`) because
+ * Satori cannot use next/font or WOFF2 files, and layout uses explicit offsets because
+ * Satori ignores the `inset` shorthand.
  * Satori only emits PNG, which is heavy for a photograph, so the result is re-encoded
  * as JPEG to stay well under the size limits some chat apps apply to link previews.
  */
 export default async function OpengraphImage() {
   const [serif, serifItalic, sans, photo] = await Promise.all([
-    asset("fonts/CormorantGaramond-Medium.ttf"),
-    asset("fonts/CormorantGaramond-MediumItalic.ttf"),
+    asset("fonts/Gambetta-Regular.ttf"),
+    asset("fonts/Gambetta-Italic.ttf"),
     asset("fonts/DMSans-Medium.ttf"),
     asset("images/resort/hero-infinity-pool.jpg"),
   ]);
@@ -69,7 +70,7 @@ export default async function OpengraphImage() {
         }}
       >
         <div style={{ display: "flex", flexDirection: "column" }}>
-          <div style={{ fontFamily: "Cormorant", fontSize: 44, letterSpacing: "0.3em" }}>
+          <div style={{ fontFamily: "Gambetta", fontSize: 44, letterSpacing: "0.3em" }}>
             {site.name}
           </div>
           <div
@@ -88,8 +89,8 @@ export default async function OpengraphImage() {
 
         <div style={{ display: "flex", flexDirection: "column", maxWidth: 720 }}>
           <div style={{ display: "flex", flexWrap: "wrap", fontSize: 92, lineHeight: 1 }}>
-            <span style={{ fontFamily: "Cormorant" }}>Stillness, shaped&nbsp;</span>
-            <span style={{ fontFamily: "Cormorant", fontStyle: "italic" }}>by the sea</span>
+            <span style={{ fontFamily: "Gambetta" }}>Stillness, shaped&nbsp;</span>
+            <span style={{ fontFamily: "Gambetta", fontStyle: "italic" }}>by the sea</span>
           </div>
           <div
             style={{
@@ -112,8 +113,8 @@ export default async function OpengraphImage() {
     {
       ...size,
       fonts: [
-        { name: "Cormorant", data: serif, style: "normal", weight: 500 },
-        { name: "Cormorant", data: serifItalic, style: "italic", weight: 500 },
+        { name: "Gambetta", data: serif, style: "normal", weight: 400 },
+        { name: "Gambetta", data: serifItalic, style: "italic", weight: 400 },
         { name: "DM Sans", data: sans, style: "normal", weight: 500 },
       ],
     },

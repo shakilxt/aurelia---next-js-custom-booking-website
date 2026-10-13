@@ -85,7 +85,7 @@ export function StayExplorer({
             {typeOptions.map((option) => (
               <label
                 key={option.label}
-                className="cursor-pointer rounded-sm border border-line-strong px-4 py-2.5 text-sm transition-colors select-none hover:border-forest-800 has-checked:border-forest-800 has-checked:bg-forest-800 has-checked:text-ivory has-focus-visible:outline-2 has-focus-visible:outline-offset-2 has-focus-visible:outline-(--focus-ring)"
+                className="inline-flex h-11 cursor-pointer items-center rounded-sm border border-line-strong px-4 text-sm transition-colors select-none hover:border-forest-800 has-checked:border-forest-800 has-checked:bg-forest-800 has-checked:text-ivory has-focus-visible:outline-2 has-focus-visible:outline-offset-2 has-focus-visible:outline-(--focus-ring)"
               >
                 <input
                   type="radio"

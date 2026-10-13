@@ -53,7 +53,7 @@ export function AccommodationCard({
         </Heading>
         <p className="mt-3 mb-6 text-muted">{stay.shortDescription}</p>
 
-        <div className="mt-auto flex items-end justify-between gap-4 border-t border-line pt-4">
+        <div className="mt-auto flex items-baseline justify-between gap-4 border-t border-line pt-4">
           <p className="text-sm text-muted">
             <span className="block">Up to {stay.capacity} guests</span>
             {stay.bedrooms} {stay.bedrooms === 1 ? "bedroom" : "bedrooms"} · {stay.areaSquareMeters}{" "}
@@ -63,7 +63,7 @@ export function AccommodationCard({
             <span className="block font-serif text-2xl leading-none text-forest-900">
               {formatMoney(stay.nightlyRateMinor, stay.currency)}
             </span>
-            <span className="text-xs text-muted">per night · demo rate</span>
+            <span className="block text-xs leading-5 text-muted">per night · demo rate</span>
           </p>
         </div>
       </div>
