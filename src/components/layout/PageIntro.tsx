@@ -12,7 +12,7 @@ interface PageIntroProps {
 /** Opening block for pages without a full-bleed photographic hero. */
 export function PageIntro({ eyebrow, title, description, children }: PageIntroProps) {
   return (
-    <Container as="header" className="pt-16 pb-12 sm:pt-24 sm:pb-16">
+    <Container as="header" className="pt-14 pb-10 sm:pt-20 sm:pb-12">
       <SectionHeading level={1} eyebrow={eyebrow} title={title} description={description} />
       {children}
     </Container>

@@ -99,3 +99,17 @@ export function formatDate(date: IsoDate, style: keyof typeof dateFormats = "med
 export function formatDateRange(checkIn: IsoDate, checkOut: IsoDate): string {
   return `${formatDate(checkIn)} – ${formatDate(checkOut)}`;
 }
+
+/**
+ * Converts to a local Date at noon for calendar widgets that work with Date objects.
+ * Noon keeps the calendar day stable even across daylight-saving transitions.
+ */
+export function isoToLocalDate(date: IsoDate): Date {
+  const [year, month, day] = date.split("-").map(Number) as [number, number, number];
+  return new Date(year, month - 1, day, 12);
+}
+
+/** The local calendar day of a Date produced by a calendar widget. */
+export function localDateToIso(date: Date): IsoDate {
+  return todayIso(date);
+}
