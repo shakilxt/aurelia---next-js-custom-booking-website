@@ -19,6 +19,7 @@ const routes = [
   "/stays/aurelia-residence",
   "/book?adults=4&stay=unknown-stay",
   "/book?stay=reef-edge-suite",
+  "/stays?guests=2&checkIn=2030-01-10&checkOut=2030-01-14",
 ];
 
 for (const route of routes) {

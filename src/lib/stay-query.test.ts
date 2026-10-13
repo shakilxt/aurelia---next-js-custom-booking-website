@@ -6,6 +6,7 @@ import {
   isFiltered,
   parseStayQuery,
   serializeStayQuery,
+  stayLinkSearch,
   type StayQuery,
 } from "./stay-query";
 
@@ -26,6 +27,7 @@ describe("parseStayQuery", () => {
     expect(
       parseStayQuery(new URLSearchParams("type=suite&guests=3&maxRate=1250&sort=price-desc")),
     ).toEqual({
+      ...defaultStayQuery,
       category: "suite",
       guests: 3,
       maxRate: 1250,
@@ -34,9 +36,45 @@ describe("parseStayQuery", () => {
   });
 
   it("round-trips through serialisation and omits defaults", () => {
-    const query: StayQuery = { category: "villa", guests: 4, maxRate: 2000, sort: "size-desc" };
+    const query: StayQuery = {
+      category: "villa",
+      guests: 4,
+      maxRate: 2000,
+      sort: "size-desc",
+      checkIn: "2026-11-02" as StayQuery["checkIn"],
+      checkOut: "2026-11-06" as StayQuery["checkOut"],
+    };
     expect(parseStayQuery(new URLSearchParams(serializeStayQuery(query)))).toEqual(query);
     expect(serializeStayQuery(defaultStayQuery)).toBe("");
+  });
+});
+
+describe("stay dates", () => {
+  it("keeps a valid pair without treating it as a filter", () => {
+    const query = parseStayQuery({ checkIn: "2026-11-02", checkOut: "2026-11-06" });
+    expect(query).toMatchObject({ checkIn: "2026-11-02", checkOut: "2026-11-06" });
+    expect(isFiltered(query)).toBe(false);
+    expect(serializeStayQuery(query)).toBe("checkIn=2026-11-02&checkOut=2026-11-06");
+  });
+
+  it("drops incomplete, reversed or overlong ranges", () => {
+    const dropped = { checkIn: null, checkOut: null };
+    expect(parseStayQuery({ checkIn: "2026-11-02" })).toMatchObject(dropped);
+    expect(parseStayQuery({ checkIn: "2026-11-06", checkOut: "2026-11-02" })).toMatchObject(
+      dropped,
+    );
+    expect(parseStayQuery({ checkIn: "2026-11-02", checkOut: "2026-11-02" })).toMatchObject(
+      dropped,
+    );
+    expect(parseStayQuery({ checkIn: "2026-11-01", checkOut: "2026-12-02" })).toMatchObject(
+      dropped,
+    );
+  });
+
+  it("builds residence links with dates and the party as adults", () => {
+    const query = parseStayQuery({ guests: "3", checkIn: "2026-11-02", checkOut: "2026-11-06" });
+    expect(stayLinkSearch(query)).toBe("checkIn=2026-11-02&checkOut=2026-11-06&adults=3");
+    expect(stayLinkSearch(defaultStayQuery)).toBe("");
   });
 });
 

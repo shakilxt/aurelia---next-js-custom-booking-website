@@ -43,7 +43,7 @@ export function Hero({ image }: HeroProps) {
         className="absolute inset-x-0 bottom-0 -z-10 h-[80%] bg-linear-to-t from-forest-900/90 via-forest-900/55 to-transparent"
       />
 
-      <Container className="grid gap-12 pt-40 pb-14 sm:pb-20 lg:grid-cols-12 lg:items-end lg:pb-24">
+      <Container className="grid gap-12 pt-40 pb-14 sm:pb-20 lg:grid-cols-12 lg:items-end lg:pb-44">
         <div className="lg:col-span-8">
           <p className="flex items-center gap-4 text-eyebrow font-medium text-ivory/90 uppercase">
             <span aria-hidden="true" className="h-px w-10 bg-gold" />
