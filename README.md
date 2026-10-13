@@ -76,6 +76,20 @@ Pure, unit-tested modules in `src/lib`:
 - `stay-query` / `booking-params` — tolerant parsing and stable serialisation of URL state.
 - `validation` — guest-details and enquiry form rules.
 
+## Homepage and search
+
+The homepage is made of server-rendered sections in `src/components/home`. The only client
+component is `BookingSearch`.
+
+- Guests and residence type filter `/stays`. Dates don't filter, because there is no
+  inventory to check. They are kept in the listing URL and carried to each residence's
+  booking panel along with the party size.
+- The search selects have `name` attributes and the form has `action="/stays"`. If
+  JavaScript hasn't loaded, a native GET still filters the listing.
+- Entrance animations use CSS scroll-driven animations (the `reveal` utility). They need no
+  JavaScript and are skipped when reduced motion is preferred or the browser lacks support.
+- Guest notes are fictional. The section and each note are visibly labelled as demo content.
+
 ## Booking simulation
 
 `/book` runs in three steps: choose a residence, add dates, guests and guest details, then see

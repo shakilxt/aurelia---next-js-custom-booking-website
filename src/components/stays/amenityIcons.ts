@@ -1,0 +1,40 @@
+import {
+  Anchor,
+  Bath,
+  BedDouble,
+  Coffee,
+  ConciergeBell,
+  Fish,
+  ShowerHead,
+  Snowflake,
+  Sofa,
+  Sun,
+  Sunset,
+  Trees,
+  Utensils,
+  Waves,
+  Wifi,
+  Wine,
+  type LucideIcon,
+} from "lucide-react";
+import type { AmenityIconName } from "@/types/amenity";
+
+/** Exhaustive: adding an icon name to the type without mapping it is a type error. */
+export const amenityIcons: Record<AmenityIconName, LucideIcon> = {
+  anchor: Anchor,
+  bath: Bath,
+  "bed-double": BedDouble,
+  coffee: Coffee,
+  "concierge-bell": ConciergeBell,
+  fish: Fish,
+  "shower-head": ShowerHead,
+  snowflake: Snowflake,
+  sofa: Sofa,
+  sun: Sun,
+  sunset: Sunset,
+  trees: Trees,
+  utensils: Utensils,
+  waves: Waves,
+  wifi: Wifi,
+  wine: Wine,
+};

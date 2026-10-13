@@ -1,44 +1,6 @@
-import {
-  Anchor,
-  Bath,
-  BedDouble,
-  Coffee,
-  ConciergeBell,
-  Fish,
-  ShowerHead,
-  Snowflake,
-  Sofa,
-  Sun,
-  Sunset,
-  Trees,
-  Utensils,
-  Waves,
-  Wifi,
-  Wine,
-  type LucideIcon,
-} from "lucide-react";
 import { getAmenity, type AmenityId } from "@/data/amenities";
-import type { AmenityCategory, AmenityIconName } from "@/types/amenity";
-
-/** Exhaustive: adding an icon name to the type without mapping it is a type error. */
-const icons: Record<AmenityIconName, LucideIcon> = {
-  anchor: Anchor,
-  bath: Bath,
-  "bed-double": BedDouble,
-  coffee: Coffee,
-  "concierge-bell": ConciergeBell,
-  fish: Fish,
-  "shower-head": ShowerHead,
-  snowflake: Snowflake,
-  sofa: Sofa,
-  sun: Sun,
-  sunset: Sunset,
-  trees: Trees,
-  utensils: Utensils,
-  waves: Waves,
-  wifi: Wifi,
-  wine: Wine,
-};
+import type { AmenityCategory } from "@/types/amenity";
+import { amenityIcons } from "./amenityIcons";
 
 const groups: { category: AmenityCategory; title: string }[] = [
   { category: "outdoors", title: "Outdoors" },
@@ -62,7 +24,7 @@ export function AmenityList({ ids }: { ids: readonly AmenityId[] }) {
             </h3>
             <ul className="mt-4 space-y-3">
               {items.map((amenity) => {
-                const Icon = amenity.iconName ? icons[amenity.iconName] : null;
+                const Icon = amenity.iconName ? amenityIcons[amenity.iconName] : null;
                 return (
                   <li key={amenity.id} className="flex items-center gap-3">
                     {Icon ? (

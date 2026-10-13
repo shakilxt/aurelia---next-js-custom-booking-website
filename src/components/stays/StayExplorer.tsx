@@ -148,7 +148,14 @@ export function StayExplorer({
         {isFiltered(current) ? (
           <button
             type="button"
-            onClick={() => navigate({ ...defaultStayQuery, sort: current.sort })}
+            onClick={() =>
+              navigate({
+                ...defaultStayQuery,
+                sort: current.sort,
+                checkIn: current.checkIn,
+                checkOut: current.checkOut,
+              })
+            }
             className="inline-flex min-h-11 items-center gap-2 text-sm font-medium text-forest-900 underline-offset-4 hover:underline"
           >
             <RotateCcw aria-hidden="true" className="size-4" strokeWidth={1.75} />

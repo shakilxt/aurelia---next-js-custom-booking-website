@@ -1,4 +1,8 @@
+import { stayRules } from "@/data/pricing";
 import type { Accommodation, AccommodationCategory } from "@/types/accommodation";
+import type { IsoDate } from "@/types/common";
+import { serializeBookingParams } from "./booking-params";
+import { nightsBetween, parseIsoDate } from "./dates";
 import { majorToMinor } from "./money";
 import { parseCount, readParam, type SearchParamsInput } from "./search-params";
 
@@ -24,6 +28,12 @@ export interface StayQuery {
   /** Maximum nightly rate in whole dollars. */
   maxRate: number | null;
   sort: StaySort;
+  /**
+   * Dates from the homepage search. They don't filter (there is no inventory to check)
+   * but travel with the visitor to each residence's booking panel.
+   */
+  checkIn: IsoDate | null;
+  checkOut: IsoDate | null;
 }
 
 export const defaultStayQuery: StayQuery = {
@@ -31,7 +41,20 @@ export const defaultStayQuery: StayQuery = {
   guests: null,
   maxRate: null,
   sort: "recommended",
+  checkIn: null,
+  checkOut: null,
 };
+
+/** Keeps a date pair only when it is structurally a valid stay; otherwise drops both. */
+function parseDateRange(params: SearchParamsInput) {
+  const checkIn = parseIsoDate(readParam(params, "checkIn"));
+  const checkOut = parseIsoDate(readParam(params, "checkOut"));
+  if (!checkIn || !checkOut) return { checkIn: null, checkOut: null };
+  const nights = nightsBetween(checkIn, checkOut);
+  return nights >= stayRules.minNights && nights <= stayRules.maxNights
+    ? { checkIn, checkOut }
+    : { checkIn: null, checkOut: null };
+}
 
 function isOneOf<T extends string>(options: readonly T[], value: string | undefined): value is T {
   return value !== undefined && (options as readonly string[]).includes(value);
@@ -54,6 +77,7 @@ export function parseStayQuery(params: SearchParamsInput): StayQuery {
     )
       ? sort
       : "recommended",
+    ...parseDateRange(params),
   };
 }
 
@@ -64,7 +88,23 @@ export function serializeStayQuery(query: StayQuery): string {
   if (query.guests) search.set("guests", String(query.guests));
   if (query.maxRate) search.set("maxRate", String(query.maxRate));
   if (query.sort !== "recommended") search.set("sort", query.sort);
+  if (query.checkIn && query.checkOut) {
+    search.set("checkIn", query.checkIn);
+    search.set("checkOut", query.checkOut);
+  }
   return search.toString();
+}
+
+/**
+ * Booking selection to carry from /stays to a residence page. The listing knows only a
+ * total party size, so it arrives as adults; the booking panel lets visitors split it.
+ */
+export function stayLinkSearch(query: StayQuery): string {
+  return serializeBookingParams({
+    checkIn: query.checkIn ?? undefined,
+    checkOut: query.checkOut ?? undefined,
+    adults: query.guests ?? undefined,
+  });
 }
 
 export function isFiltered(query: StayQuery): boolean {

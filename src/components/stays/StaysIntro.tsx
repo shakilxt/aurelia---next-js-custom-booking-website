@@ -1,7 +1,6 @@
 import { PageIntro } from "@/components/layout/PageIntro";
 import { DemoNotice } from "@/components/ui/DemoNotice";
 
-/** Shared by the page and its loading state so the intro never shifts. */
 export function StaysIntro() {
   return (
     <PageIntro
