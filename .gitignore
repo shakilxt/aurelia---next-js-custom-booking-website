@@ -45,3 +45,6 @@ next-env.d.ts
 /playwright-report/
 /blob-report/
 /playwright/.cache/
+
+# Gambetta's licence forbids redistributing the font files; `npm run fonts` fetches them.
+/src/assets/fonts/Gambetta-*
