@@ -2,10 +2,14 @@ import { BookingSearch } from "@/components/booking/BookingSearch";
 import { Container } from "@/components/ui/Container";
 import { DemoNotice } from "@/components/ui/DemoNotice";
 
-/** Search panel that overlaps the hero's lower edge on large screens. */
+/**
+ * Search panel that overlaps the hero's lower edge on large screens. The hero fills the
+ * viewport, so the overlap decides what shows above the fold: 5rem reveals the title row
+ * and ends in the gap before the fields, never a sliver of their top edge.
+ */
 export function HomeBookingSearch({ maxGuests }: { maxGuests: number }) {
   return (
-    <Container className="relative z-10 pt-10 lg:-mt-24 lg:pt-0">
+    <Container className="relative z-10 pt-10 lg:-mt-20 lg:pt-0">
       <section
         aria-labelledby="booking-search-title"
         className="border border-line bg-ivory p-5 sm:p-8 lg:shadow-soft"

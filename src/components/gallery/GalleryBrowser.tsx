@@ -38,7 +38,7 @@ export function GalleryBrowser({ items }: GalleryBrowserProps) {
             {filters.map((filter) => (
               <label
                 key={filter.label}
-                className="cursor-pointer rounded-sm border border-line-strong px-4 py-2.5 text-sm transition-colors select-none hover:border-forest-800 has-checked:border-forest-800 has-checked:bg-forest-800 has-checked:text-ivory has-focus-visible:outline-2 has-focus-visible:outline-offset-2 has-focus-visible:outline-(--focus-ring)"
+                className="inline-flex h-11 cursor-pointer items-center rounded-sm border border-line-strong px-4 text-sm transition-colors select-none hover:border-forest-800 has-checked:border-forest-800 has-checked:bg-forest-800 has-checked:text-ivory has-focus-visible:outline-2 has-focus-visible:outline-offset-2 has-focus-visible:outline-(--focus-ring)"
               >
                 <input
                   type="radio"
@@ -52,7 +52,8 @@ export function GalleryBrowser({ items }: GalleryBrowserProps) {
             ))}
           </div>
         </fieldset>
-        <p role="status" className="text-sm text-muted">
+        {/* As tall as the filter chips, so the count sits on their centre line. */}
+        <p role="status" className="flex h-11 items-center text-sm text-muted">
           {visible.length} photographs
         </p>
       </div>

@@ -57,7 +57,7 @@ test.describe("booking panel", () => {
 
     const days = dialog.locator('[role="grid"] button:not([disabled])');
     await days.nth(3).click();
-    await expect(dialog.getByText("Now select a check-out date.")).toBeVisible();
+    await expect(dialog.getByText(/Now select check-out, up to 30 nights later\./)).toBeVisible();
     await days.nth(6).click();
     await expect(dialog.getByText(/^3 nights · /)).toBeVisible();
     await dialog.getByRole("button", { name: "Done" }).click();
@@ -70,6 +70,33 @@ test.describe("booking panel", () => {
       "Add date",
     );
     await expect(panel(page).getByText("$540 × 3 nights")).toBeVisible();
+  });
+
+  test("highlights the check-in and limits check-out to the longest stay", async ({ page }) => {
+    await page.goto("/stays/garden-bungalow");
+    await panel(page)
+      .getByRole("button", { name: /Check-in/ })
+      .click();
+    const dialog = page.getByRole("dialog", { name: "Select your dates" });
+    const day = (offset: number) => dialog.locator(`td[data-day="${isoFromToday(offset)}"] button`);
+    // The phone layout shows one month at a time, so page forward until a day is shown.
+    const show = async (offset: number) => {
+      while (!(await day(offset).isVisible())) {
+        await dialog.getByRole("button", { name: /next month/i }).click();
+      }
+    };
+
+    // The calendar loads on demand; wait for it before paging.
+    await expect(dialog.getByRole("grid").first()).toBeVisible();
+    await show(2);
+    await day(2).click();
+    await page.mouse.move(0, 0);
+    await expect(day(2)).toHaveCSS("background-color", "rgb(24, 61, 50)");
+
+    await show(32);
+    await expect(day(32)).toBeEnabled();
+    await show(33);
+    await expect(day(33)).toBeDisabled();
   });
 
   test("closes the calendar with Escape and returns focus", async ({ page }) => {

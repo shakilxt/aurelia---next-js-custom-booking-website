@@ -52,7 +52,7 @@ export function Hero({ image }: HeroProps) {
             Concept resort · South Pacific
           </p>
           <h1 id="hero-title" className="mt-6 max-w-4xl text-display">
-            Stillness, shaped <em className="font-serif italic">by the sea</em>
+            Stillness, shaped <em className="font-serif italic sm:block">by the sea</em>
           </h1>
           <p className="mt-7 max-w-xl text-lead text-ivory/85">
             Pool villas, ocean suites and garden bungalows set among palms, white sand and a quiet

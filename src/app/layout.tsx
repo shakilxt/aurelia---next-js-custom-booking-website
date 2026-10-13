@@ -6,6 +6,7 @@ import { getSiteUrl } from "@/lib/site-url";
 import { SiteHeader } from "@/components/layout/SiteHeader";
 import { SiteFooter } from "@/components/layout/SiteFooter";
 import { SkipLink } from "@/components/layout/SkipLink";
+import { NavigationProgress } from "@/components/layout/NavigationProgress";
 import { sans, serif } from "./fonts";
 import "./globals.css";
 
@@ -30,6 +31,7 @@ export default function RootLayout({ children }: { children: ReactNode }) {
   return (
     <html lang="en" className={`${serif.variable} ${sans.variable}`}>
       <body>
+        <NavigationProgress />
         <SkipLink />
         <SiteHeader />
         <main id="main" tabIndex={-1} className="outline-none">
