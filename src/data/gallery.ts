@@ -11,7 +11,7 @@ export const galleryCategoryLabels = {
 export const galleryItems = [
   { asset: media.heroInfinityPool, category: "residences" },
   { asset: media.overwaterAerial, category: "ocean" },
-  { asset: media.overwaterSuiteInterior, category: "residences" },
+  { asset: media.groveVillaBedroom, category: "residences" },
   { asset: media.beachSunrise, category: "ocean" },
   { asset: media.waterGarden, category: "island" },
   { asset: media.privateDining, category: "dining-wellness" },

@@ -262,3 +262,29 @@
     }
   }
 }
+
+@layer components {
+  /* Full-screen image viewer: a plain cross-fade, since movement would compete with the photo. */
+  .lightbox {
+    opacity: 0;
+    transition:
+      opacity 0.3s var(--ease-out-soft),
+      overlay 0.3s allow-discrete,
+      display 0.3s allow-discrete;
+  }
+
+  .lightbox[open] {
+    opacity: 1;
+  }
+
+  /* The reserved scrollbar gutter shows the canvas colour; match it to the viewer. */
+  html:has(.lightbox[open]) {
+    background-color: var(--color-forest-900);
+  }
+
+  @starting-style {
+    .lightbox[open] {
+      opacity: 0;
+    }
+  }
+}

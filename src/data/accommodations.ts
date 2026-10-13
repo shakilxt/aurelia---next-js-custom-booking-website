@@ -116,7 +116,7 @@ export const accommodations = [
       "A thatched suite on stilts above the lagoon, with steps from the deck into clear water.",
     description:
       "Reached by a long timber jetty, the Overwater Lagoon Suite sits above water so clear that reef fish are visible from the lounge. A curved wall of glass frames the sunrise, and a private deck descends straight into the lagoon. Inside, a calm palette of sand, oak and linen keeps the focus on the water.",
-    images: [media.overwaterSuiteExterior, media.overwaterSuiteInterior, media.overwaterSuiteJetty],
+    images: [media.overwaterSuiteExterior, media.overwaterAerial, media.overwaterSuiteJetty],
     capacity: 2,
     bedrooms: 1,
     bathrooms: 1,
