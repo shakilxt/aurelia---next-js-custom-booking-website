@@ -60,21 +60,9 @@ export function SiteFooter() {
       <Container>
         <div className="flex flex-col gap-4 border-t border-ivory/15 py-8 text-sm text-ivory/70 md:flex-row md:items-start md:justify-between md:gap-12">
           <p className="max-w-2xl leading-relaxed">{site.disclaimer}</p>
-          <div className="shrink-0 space-y-1 md:text-right">
-            <p>
-              © {new Date().getFullYear()} {site.name} concept
-            </p>
-            <p>
-              Photography from{" "}
-              <a
-                href="https://unsplash.com"
-                rel="noopener"
-                className="underline underline-offset-4 hover:text-ivory"
-              >
-                Unsplash
-              </a>
-            </p>
-          </div>
+          <p className="shrink-0">
+            © {new Date().getFullYear()} {site.name} concept
+          </p>
         </div>
       </Container>
     </footer>
