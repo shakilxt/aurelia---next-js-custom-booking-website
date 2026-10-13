@@ -70,7 +70,7 @@ export function MobileNavigation({ items, cta, note }: MobileNavigationProps) {
         ref={dialogRef}
         id={dialogId}
         aria-label="Site menu"
-        className="sheet fixed inset-y-0 right-0 left-auto m-0 h-dvh max-h-none w-full max-w-md overflow-y-auto bg-ivory p-0 text-charcoal sm:border-l sm:border-line lg:hidden"
+        className="sheet fixed inset-y-0 right-0 left-auto m-0 h-dvh max-h-none w-full max-w-md overflow-y-auto bg-shell p-0 text-charcoal sm:border-l sm:border-line lg:hidden"
         onClose={() => {
           setOpen(false);
           triggerRef.current?.focus();
@@ -84,7 +84,7 @@ export function MobileNavigation({ items, cta, note }: MobileNavigationProps) {
           <div className="flex h-(--header-h) items-center justify-between">
             <Link
               href="/"
-              className="font-serif text-2xl tracking-[0.32em] text-forest-900"
+              className="font-serif text-2xl font-semibold tracking-[0.32em] text-forest-900"
               onClick={close}
             >
               AURELIA
@@ -107,7 +107,7 @@ export function MobileNavigation({ items, cta, note }: MobileNavigationProps) {
                   <NavLink
                     href={item.href}
                     onNavigate={close}
-                    className="flex items-center justify-between py-4 font-serif text-[2rem] leading-tight text-forest-900 aria-[current=page]:text-gold-ink"
+                    className="flex items-center justify-between py-4 font-serif text-[2rem] leading-tight font-semibold text-forest-900 aria-[current=page]:text-gold-ink"
                   >
                     {item.label}
                   </NavLink>

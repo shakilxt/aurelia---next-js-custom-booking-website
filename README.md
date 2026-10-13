@@ -43,7 +43,7 @@ lightbox.
 - Next.js 16 (App Router, Turbopack, typed routes) · React 19 · TypeScript 5.9 (strict, with
   `noUncheckedIndexedAccess`)
 - Tailwind CSS 4 with CSS-first design tokens (`src/app/globals.css`)
-- `next/font` (Gambetta, DM Sans), lucide-react, react-day-picker 10
+- `next/font` (Lora, DM Sans), lucide-react, react-day-picker 10
 - Vitest (unit) · Playwright + axe-core (end-to-end and accessibility) · Prettier · ESLint
 
 Runtime dependencies are deliberately minimal: `next`, `react`, `react-dom`, `lucide-react` and
@@ -58,19 +58,18 @@ npm install
 npm run dev          # http://localhost:3000
 ```
 
-| Command             | Purpose                                                       |
-| ------------------- | ------------------------------------------------------------- |
-| `npm run dev`       | Development server                                            |
-| `npm run build`     | Production build                                              |
-| `npm run start`     | Serve the production build                                    |
-| `npm run typecheck` | Generate route types and run `tsc --noEmit`                   |
-| `npm run lint`      | ESLint (`eslint-config-next`)                                 |
-| `npm run format`    | Prettier (with Tailwind class sorting)                        |
-| `npm run test`      | Vitest unit tests                                             |
-| `npm run test:e2e`  | Playwright suite (builds and serves the app first)            |
-| `npm run check`     | Typecheck, lint, format check and unit tests                  |
-| `npm run images`    | Re-download and grade photography from the image manifest     |
-| `npm run fonts`     | Fetch the Gambetta font files (runs before `dev` and `build`) |
+| Command             | Purpose                                                   |
+| ------------------- | --------------------------------------------------------- |
+| `npm run dev`       | Development server                                        |
+| `npm run build`     | Production build                                          |
+| `npm run start`     | Serve the production build                                |
+| `npm run typecheck` | Generate route types and run `tsc --noEmit`               |
+| `npm run lint`      | ESLint (`eslint-config-next`)                             |
+| `npm run format`    | Prettier (with Tailwind class sorting)                    |
+| `npm run test`      | Vitest unit tests                                         |
+| `npm run test:e2e`  | Playwright suite (builds and serves the app first)        |
+| `npm run check`     | Typecheck, lint, format check and unit tests              |
+| `npm run images`    | Re-download and grade photography from the image manifest |
 
 Run `npx playwright install chromium` once before the first end-to-end run. To use an existing
 Chromium build instead, set `PLAYWRIGHT_CHROMIUM_EXECUTABLE=/path/to/chrome`.
@@ -209,8 +208,7 @@ Every image has been checked at full size for logos, watermarks and recognisable
 because a fictional resort must not borrow a real one's identity. Repeat that check when adding
 photos.
 
-The gallery page credits Unsplash. Photographers confirmed through
-the Unsplash API so far (matched by image ID, also recorded in the manifest):
+Photographers confirmed through the Unsplash API so far (matched by image ID, also recorded in the manifest):
 
 | Image                            | Photographer                                            | Source                                                                                                                      |
 | -------------------------------- | ------------------------------------------------------- | --------------------------------------------------------------------------------------------------------------------------- |
@@ -229,12 +227,9 @@ the Unsplash API so far (matched by image ID, also recorded in the manifest):
 The remaining photographers can be matched the same way; the API's demo rate limit (50 requests
 an hour) stopped this pass early.
 
-Headings and prices use Gambetta from [Fontshare](https://www.fontshare.com/fonts/gambetta),
-free for commercial use under the ITF Free Font License (`src/assets/fonts/FFL-Gambetta.txt`).
-That licence allows self-hosting but not redistributing the font files, so they are gitignored
-and `npm run fonts` downloads them, unmodified, before `dev` and `build`. Body text uses DM Sans
-under the SIL Open Font License (`src/assets/fonts/OFL-DMSans.txt`). Pages load both through
-`next/font`, and the social card uses static TTF instances.
+Headings and prices use Lora (SemiBold) and body text uses DM Sans, both under the SIL Open
+Font License (`src/assets/fonts/OFL-Lora.txt`, `src/assets/fonts/OFL-DMSans.txt`). Pages load
+both through `next/font`, and the social card uses static TTF instances.
 
 ## Scope and future work
 

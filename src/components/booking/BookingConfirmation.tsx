@@ -69,7 +69,7 @@ export function BookingConfirmationDetails({ confirmation }: { confirmation: Dem
     <div>
       <section
         aria-labelledby="demo-reference-label"
-        className="border border-gold/60 bg-sand-light p-6 sm:p-8"
+        className="border border-gold/60 bg-mist-light p-6 sm:p-8"
       >
         <h2
           id="demo-reference-label"
@@ -77,7 +77,7 @@ export function BookingConfirmationDetails({ confirmation }: { confirmation: Dem
         >
           Demo reference
         </h2>
-        <p className="mt-2 font-serif text-[1.625rem] leading-tight tracking-[0.06em] [overflow-wrap:anywhere] text-forest-900 sm:text-[2rem]">
+        <p className="mt-2 font-serif text-[1.625rem] leading-tight font-semibold tracking-[0.06em] [overflow-wrap:anywhere] text-forest-900 sm:text-[2rem]">
           {reference}
         </p>
         <p className="mt-2 text-sm text-muted">

@@ -26,7 +26,7 @@ export function PriceSummary({ estimate }: { estimate: StayEstimate }) {
         ))}
         <div className="flex items-baseline justify-between gap-4 border-t border-line pt-4">
           <dt className="font-medium">Estimated total</dt>
-          <dd className="font-serif text-[1.75rem] leading-none text-forest-900 tabular-nums">
+          <dd className="font-serif text-[1.75rem] leading-none font-semibold text-forest-900 tabular-nums">
             {money(estimate.totalMinor)}
           </dd>
         </div>

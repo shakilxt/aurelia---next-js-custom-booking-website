@@ -89,7 +89,7 @@ export function BookingPanel({ stay, initial = {} }: BookingPanelProps) {
         Plan your stay at {stay.name}
       </h2>
       <p className="flex items-baseline gap-2">
-        <span className="font-serif text-[2.5rem] leading-none text-forest-900">
+        <span className="font-serif text-[2.5rem] leading-none font-semibold text-forest-900">
           {formatMoney(stay.nightlyRateMinor, stay.currency)}
         </span>
         <span className="text-sm text-muted">per night</span>

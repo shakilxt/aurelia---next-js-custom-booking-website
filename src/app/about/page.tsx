@@ -86,7 +86,7 @@ export default function AboutPage() {
         as="section"
         className="grid gap-12 pb-20 lg:grid-cols-12 lg:items-center lg:pb-28"
       >
-        <div className="relative aspect-4/3 reveal overflow-hidden bg-sand lg:col-span-7">
+        <div className="relative aspect-4/3 reveal overflow-hidden bg-mist lg:col-span-7">
           <ResortImage
             asset={media.residencePavilion}
             fill
@@ -114,7 +114,7 @@ export default function AboutPage() {
         </div>
       </Container>
 
-      <section aria-labelledby="philosophy" className="bg-sand-light section-y">
+      <section aria-labelledby="philosophy" className="bg-mist-light section-y">
         <Container>
           <SectionHeading
             id="philosophy"
@@ -127,7 +127,7 @@ export default function AboutPage() {
               <li key={principle.title} className="reveal border-t border-gold/60 pt-6">
                 <span
                   aria-hidden="true"
-                  className="font-serif text-[2.5rem] leading-none text-gold-ink lining-nums"
+                  className="font-serif text-[2.5rem] leading-none font-semibold text-gold-ink lining-nums"
                 >
                   0{index + 1}
                 </span>
@@ -162,21 +162,21 @@ export default function AboutPage() {
           </p>
         </div>
         <div className="grid reveal grid-cols-2 gap-4 lg:col-span-6 lg:col-start-7">
-          <div className="relative col-span-2 aspect-video overflow-hidden bg-sand">
+          <div className="relative col-span-2 aspect-video overflow-hidden bg-mist">
             <ResortImage
               asset={media.groveVillaVeranda}
               fill
               sizes="(min-width: 64rem) 45vw, 100vw"
             />
           </div>
-          <div className="relative aspect-square overflow-hidden bg-sand">
+          <div className="relative aspect-square overflow-hidden bg-mist">
             <ResortImage
               asset={media.gardenBungalowThatch}
               fill
               sizes="(min-width: 64rem) 22vw, 50vw"
             />
           </div>
-          <div className="relative aspect-square overflow-hidden bg-sand">
+          <div className="relative aspect-square overflow-hidden bg-mist">
             <ResortImage asset={media.reefGarden} fill sizes="(min-width: 64rem) 22vw, 50vw" />
           </div>
         </div>
@@ -197,7 +197,7 @@ export default function AboutPage() {
                 className="flex flex-col-reverse justify-end border-t border-line pt-6"
               >
                 <dt className="mt-2 text-sm text-muted">{fact.label}</dt>
-                <dd className="font-serif text-[2.75rem] leading-none text-forest-900 lining-nums">
+                <dd className="font-serif text-[2.75rem] leading-none font-semibold text-forest-900 lining-nums">
                   {fact.value}
                 </dd>
               </div>

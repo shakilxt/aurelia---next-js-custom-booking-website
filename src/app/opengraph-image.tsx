@@ -13,16 +13,14 @@ const asset = (path: string) => readFile(join(process.cwd(), "src/assets", path)
 
 /**
  * Default social card, rendered once at build time. Static TTF instances live in
- * src/assets/fonts (DM Sans is bundled; Gambetta is fetched by `npm run fonts`) because
- * Satori cannot use next/font or WOFF2 files, and layout uses explicit offsets because
- * Satori ignores the `inset` shorthand.
+ * src/assets/fonts because Satori cannot use next/font or WOFF2 files, and layout uses
+ * explicit offsets because Satori ignores the `inset` shorthand.
  * Satori only emits PNG, which is heavy for a photograph, so the result is re-encoded
  * as JPEG to stay well under the size limits some chat apps apply to link previews.
  */
 export default async function OpengraphImage() {
-  const [serif, serifItalic, sans, photo] = await Promise.all([
-    asset("fonts/Gambetta-Regular.ttf"),
-    asset("fonts/Gambetta-Italic.ttf"),
+  const [serif, sans, photo] = await Promise.all([
+    asset("fonts/Lora-SemiBold.ttf"),
     asset("fonts/DMSans-Medium.ttf"),
     asset("images/resort/hero-infinity-pool.jpg"),
   ]);
@@ -66,11 +64,11 @@ export default async function OpengraphImage() {
           justifyContent: "space-between",
           padding: "64px 72px",
           width: "100%",
-          color: "#f8f6f0",
+          color: "#f5f6f3",
         }}
       >
         <div style={{ display: "flex", flexDirection: "column" }}>
-          <div style={{ fontFamily: "Gambetta", fontSize: 44, letterSpacing: "0.3em" }}>
+          <div style={{ fontFamily: "Lora", fontSize: 44, letterSpacing: "0.3em" }}>
             {site.name}
           </div>
           <div
@@ -87,10 +85,19 @@ export default async function OpengraphImage() {
           </div>
         </div>
 
-        <div style={{ display: "flex", flexDirection: "column", maxWidth: 720 }}>
-          <div style={{ display: "flex", flexWrap: "wrap", fontSize: 92, lineHeight: 1 }}>
-            <span style={{ fontFamily: "Gambetta" }}>Stillness, shaped&nbsp;</span>
-            <span style={{ fontFamily: "Gambetta", fontStyle: "italic" }}>by the sea</span>
+        <div style={{ display: "flex", flexDirection: "column" }}>
+          {/* Two explicit lines: Satori's wrapping would leave "quiet" on a third. */}
+          <div
+            style={{
+              display: "flex",
+              flexDirection: "column",
+              fontFamily: "Lora",
+              fontSize: 92,
+              lineHeight: 1.05,
+            }}
+          >
+            <span>Where the world</span>
+            <span>grows quiet</span>
           </div>
           <div
             style={{
@@ -101,7 +108,7 @@ export default async function OpengraphImage() {
               fontSize: 20,
               letterSpacing: "0.16em",
               textTransform: "uppercase",
-              color: "rgba(248,246,240,0.85)",
+              color: "rgba(245,246,243,0.85)",
             }}
           >
             <div style={{ width: 48, height: 1, backgroundColor: "#b49a68", marginRight: 18 }} />
@@ -113,8 +120,7 @@ export default async function OpengraphImage() {
     {
       ...size,
       fonts: [
-        { name: "Gambetta", data: serif, style: "normal", weight: 400 },
-        { name: "Gambetta", data: serifItalic, style: "italic", weight: 400 },
+        { name: "Lora", data: serif, style: "normal", weight: 600 },
         { name: "DM Sans", data: sans, style: "normal", weight: 500 },
       ],
     },

@@ -53,14 +53,14 @@ test.describe("desktop navigation", () => {
     await expect(bar).toHaveCSS("background-color", "rgba(0, 0, 0, 0)");
     await page.mouse.wheel(0, 600);
     await expect(header).toHaveAttribute("data-scrolled", "");
-    await expect(bar).toHaveCSS("background-color", "rgb(248, 246, 240)");
+    await expect(bar).toHaveCSS("background-color", "rgb(245, 246, 243)");
   });
 
   test("header is solid on pages without a hero", async ({ page }) => {
     await page.goto("/about");
     await expect(page.locator("[data-site-header] > div")).toHaveCSS(
       "background-color",
-      "rgb(248, 246, 240)",
+      "rgb(245, 246, 243)",
     );
   });
 });

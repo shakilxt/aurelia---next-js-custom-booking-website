@@ -41,11 +41,11 @@ export function SectionHeading({
           {eyebrow}
         </p>
       ) : null}
-      <Heading id={id} className={cx(titleSize[level], inverse ? "text-ivory" : "text-forest-900")}>
+      <Heading id={id} className={cx(titleSize[level], inverse ? "text-shell" : "text-forest-900")}>
         {title}
       </Heading>
       {description ? (
-        <div className={cx("mt-5 text-lead", inverse ? "text-ivory/80" : "text-muted")}>
+        <div className={cx("mt-5 text-lead", inverse ? "text-shell/80" : "text-muted")}>
           {description}
         </div>
       ) : null}

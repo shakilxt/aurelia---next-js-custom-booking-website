@@ -118,7 +118,7 @@ export default async function StayPage({ params }: PageProps<"/stays/[slug]">) {
         </div>
       </Container>
 
-      <section aria-labelledby="related-stays" className="border-t border-line bg-sand-light">
+      <section aria-labelledby="related-stays" className="border-t border-line bg-mist-light">
         <Container className="section-y">
           <SectionHeading
             id="related-stays"

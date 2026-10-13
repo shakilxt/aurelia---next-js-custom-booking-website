@@ -17,7 +17,7 @@ const notes = [
 /** Destination and gallery teaser. */
 export function IslandSection({ images: [wide, tall, left, right] }: IslandSectionProps) {
   return (
-    <section aria-labelledby="the-island" className="bg-sand-light section-y">
+    <section aria-labelledby="the-island" className="bg-mist-light section-y">
       <Container className="grid gap-14 lg:grid-cols-12 lg:items-center">
         <div className="reveal lg:col-span-4">
           <SectionHeading
@@ -42,16 +42,16 @@ export function IslandSection({ images: [wide, tall, left, right] }: IslandSecti
         </div>
 
         <div className="grid reveal grid-cols-2 gap-3 sm:gap-4 lg:col-span-7 lg:col-start-6">
-          <div className="relative col-span-2 aspect-video overflow-hidden bg-sand">
+          <div className="relative col-span-2 aspect-video overflow-hidden bg-mist">
             <ResortImage asset={wide} fill sizes="(min-width: 64rem) 55vw, 100vw" />
           </div>
-          <div className="relative aspect-square overflow-hidden bg-sand sm:row-span-2 sm:aspect-auto">
+          <div className="relative aspect-square overflow-hidden bg-mist sm:row-span-2 sm:aspect-auto">
             <ResortImage asset={tall} fill sizes="(min-width: 64rem) 27vw, 50vw" />
           </div>
-          <div className="relative aspect-square overflow-hidden bg-sand sm:aspect-4/3">
+          <div className="relative aspect-square overflow-hidden bg-mist sm:aspect-4/3">
             <ResortImage asset={left} fill sizes="(min-width: 64rem) 27vw, 50vw" />
           </div>
-          <div className="relative aspect-4/3 overflow-hidden bg-sand max-sm:hidden">
+          <div className="relative aspect-4/3 overflow-hidden bg-mist max-sm:hidden">
             <ResortImage asset={right} fill sizes="(min-width: 64rem) 27vw, 50vw" />
           </div>
         </div>

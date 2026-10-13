@@ -58,7 +58,7 @@ export default function ExperiencesPage() {
             >
               <div
                 className={cx(
-                  "relative aspect-4/3 reveal overflow-hidden bg-sand lg:col-span-7",
+                  "relative aspect-4/3 reveal overflow-hidden bg-mist lg:col-span-7",
                   index % 2 === 1 && "lg:order-last lg:col-start-6",
                 )}
               >
@@ -115,7 +115,7 @@ export default function ExperiencesPage() {
                 <li key={step.title}>
                   <span
                     aria-hidden="true"
-                    className="font-serif text-[2.5rem] leading-none text-gold-ink lining-nums"
+                    className="font-serif text-[2.5rem] leading-none font-semibold text-gold-ink lining-nums"
                   >
                     0{index + 1}
                   </span>

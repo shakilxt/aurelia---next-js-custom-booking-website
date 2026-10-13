@@ -117,7 +117,7 @@ function SelectCell({
   return (
     <label
       className={cx(
-        "relative flex min-h-16 flex-col justify-center border border-line-strong bg-white px-4 py-3 transition-colors hover:bg-sand-light has-focus-visible:outline-2 has-focus-visible:-outline-offset-2 has-focus-visible:outline-(--focus-ring)",
+        "relative flex min-h-16 flex-col justify-center border border-line-strong bg-white px-4 py-3 transition-colors hover:bg-mist-light has-focus-visible:outline-2 has-focus-visible:-outline-offset-2 has-focus-visible:outline-(--focus-ring)",
         // The select fills the cell so the whole field is one large click target.
         "[&_select]:absolute [&_select]:inset-0 [&_select]:cursor-pointer [&_select]:appearance-none [&_select]:bg-transparent [&_select]:px-4 [&_select]:pt-7 [&_select]:pr-10 [&_select]:pb-3 [&_select]:text-charcoal [&_select]:focus-visible:outline-none",
         className,

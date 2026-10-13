@@ -12,29 +12,29 @@
   --color-white: #ffffff;
 
   /* Primary actions, strong accents and dark surfaces. */
-  --color-forest-900: #102c25; /* ivory on forest-900: 13.8:1 */
-  --color-forest-800: #183d32; /* forest-800 on ivory: 11.1:1 — white on forest-800: 12.0:1 */
+  --color-forest-900: #102c25; /* shell on forest-900: 13.7:1 */
+  --color-forest-800: #183d32; /* forest-800 on shell: 11.0:1 — white on forest-800: 12.0:1 */
   --color-forest-700: #22503f;
 
-  /* Content surfaces. */
-  --color-ivory: #f8f6f0;
-  --color-sand: #e8dfd0;
-  --color-sand-light: #f1ece3;
+  /* Content surfaces: a neutral off-white and a soft grey-green, no cream. */
+  --color-shell: #f5f6f3;
+  --color-mist: #e3e7e2;
+  --color-mist-light: #eef1ed;
 
-  /* Gold is decorative on light surfaces (2.5:1 on ivory). Use gold-ink for small text there. */
+  /* Gold is decorative on light surfaces (2.5:1 on shell). Use gold-ink for small text there. */
   --color-gold: #b49a68; /* gold on forest-900: 5.5:1 */
-  --color-gold-ink: #7a6440; /* gold-ink on ivory: 5.2:1 */
+  --color-gold-ink: #7a6440; /* gold-ink on shell: 5.2:1, on mist: 4.5:1 */
 
   /* Text. The spec's #747A73 measured 4.07:1 on ivory, so muted text is darkened. */
-  --color-charcoal: #252a27; /* 13.5:1 on ivory */
-  --color-muted: #5f655e; /* 5.5:1 on ivory, 4.5:1 on sand */
+  --color-charcoal: #252a27; /* 13.5:1 on shell */
+  --color-muted: #5f655e; /* 5.5:1 on shell, 4.8:1 on mist */
 
   /* Borders: `line` is decorative; `line-strong` meets 3:1 for form-control boundaries. */
-  --color-line: #ddd5c6;
-  --color-line-strong: #878b83;
+  --color-line: #d6dbd5;
+  --color-line-strong: #878b83; /* 3.2:1 on shell */
 
   /* Status. Always paired with text or an icon, never colour alone. */
-  --color-danger: #9b2c22; /* 7.0:1 on ivory */
+  --color-danger: #9b2c22; /* 7.0:1 on shell */
 
   /* Fluid type scale for headings; body copy uses Tailwind's default sizes. */
   --text-display: clamp(3rem, 1.9rem + 4.6vw, 6.75rem);
@@ -69,7 +69,7 @@
 
 /* Font families are provided as CSS variables by next/font (see src/app/fonts.ts). */
 @theme inline {
-  --font-serif: var(--font-gambetta), "Gambetta", Georgia, "Times New Roman", serif;
+  --font-serif: var(--font-lora), Georgia, "Times New Roman", serif;
   --font-sans: var(--font-dm-sans), "DM Sans", ui-sans-serif, system-ui, sans-serif;
 }
 
@@ -121,7 +121,7 @@
   }
 
   body {
-    @apply bg-ivory font-sans text-charcoal antialiased;
+    @apply bg-shell font-sans text-charcoal antialiased;
     text-rendering: optimizeLegibility;
   }
 
@@ -129,7 +129,7 @@
   h2,
   h3,
   h4 {
-    @apply font-serif font-normal text-balance;
+    @apply font-serif font-semibold text-balance;
   }
 
   p {
@@ -137,12 +137,12 @@
   }
 
   ::selection {
-    @apply bg-forest-800 text-ivory;
+    @apply bg-forest-800 text-shell;
   }
 
   /* Dark surfaces switch the focus ring to a light colour so it stays visible. */
   [data-surface="dark"] {
-    --focus-ring: var(--color-ivory);
+    --focus-ring: var(--color-shell);
   }
 
   :focus-visible {

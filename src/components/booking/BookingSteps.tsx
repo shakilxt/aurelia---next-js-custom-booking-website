@@ -34,7 +34,7 @@ export function BookingSteps({ current }: { current: BookingStep }) {
               aria-hidden="true"
               className={cx(
                 "flex size-7 items-center justify-center rounded-full border text-xs tabular-nums",
-                active && "border-forest-800 bg-forest-800 text-ivory",
+                active && "border-forest-800 bg-forest-800 text-shell",
                 done && "border-forest-800 text-forest-800",
                 !active && !done && "border-line-strong text-muted",
               )}

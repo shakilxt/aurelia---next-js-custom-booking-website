@@ -39,7 +39,7 @@ export function Dialog({ open, onClose, title, children, footer }: DialogProps) 
       onClick={(event) => {
         if (event.target === event.currentTarget) event.currentTarget.close();
       }}
-      className="modal m-auto max-h-[min(92dvh,52rem)] w-full max-w-3xl overflow-hidden bg-ivory p-0 text-charcoal shadow-soft max-sm:mb-0 max-sm:max-w-none"
+      className="modal m-auto max-h-[min(92dvh,52rem)] w-full max-w-3xl overflow-hidden bg-shell p-0 text-charcoal shadow-soft max-sm:mb-0 max-sm:max-w-none"
     >
       <div className="flex max-h-[inherit] flex-col">
         <div className="flex items-center justify-between gap-4 border-b border-line px-5 py-3 sm:px-8">
@@ -50,7 +50,7 @@ export function Dialog({ open, onClose, title, children, footer }: DialogProps) 
             type="button"
             aria-label="Close"
             onClick={() => ref.current?.close()}
-            className="-mr-2 inline-flex size-11 items-center justify-center rounded-sm hover:bg-sand-light"
+            className="-mr-2 inline-flex size-11 items-center justify-center rounded-sm hover:bg-mist-light"
           >
             <X aria-hidden="true" className="size-5" strokeWidth={1.5} />
           </button>

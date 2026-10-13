@@ -6,7 +6,7 @@ export const defaultSocialImage = {
   url: "/opengraph-image",
   width: 1200,
   height: 630,
-  alt: "AURELIA, a concept resort: an infinity pool above the ocean, with the line “Stillness, shaped by the sea”.",
+  alt: "AURELIA, a concept resort: an infinity pool above the ocean, with the line “Where the world grows quiet”.",
 } as const;
 
 /**
