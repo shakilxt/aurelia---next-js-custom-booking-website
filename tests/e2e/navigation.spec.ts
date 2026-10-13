@@ -25,8 +25,10 @@ test.describe("routes", () => {
       .getByRole("contentinfo")
       .getByRole("link")
       .evaluateAll((links) => links.map((link) => link.getAttribute("href")));
-    expect(hrefs.length).toBeGreaterThan(0);
-    for (const href of new Set(hrefs)) {
+    // External links (the photography credit) are not ours to health-check.
+    const internal = hrefs.filter((href) => href?.startsWith("/"));
+    expect(internal.length).toBeGreaterThan(0);
+    for (const href of new Set(internal)) {
       const response = await request.get(href ?? "");
       expect(response.status(), href ?? "").toBe(200);
     }
