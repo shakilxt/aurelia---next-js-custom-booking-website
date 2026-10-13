@@ -1,0 +1,112 @@
+{
+  "$comment": "Source photographs for src/assets/images. Each entry is a free-licence Unsplash photo (https://unsplash.com/license) referenced by its images.unsplash.com id. `credit` records the photographer where it has been confirmed through the Unsplash API. Run `npm run images` to (re)generate the local files.",
+  "defaults": { "width": 1600 },
+  "images": [
+    {
+      "file": "resort/hero-infinity-pool",
+      "unsplash": "1540541338287-41700207dee6",
+      "width": 2400
+    },
+    { "file": "resort/water-garden", "unsplash": "1596178065887-1198b6148b2b" },
+    { "file": "resort/overwater-aerial", "unsplash": "1514282401047-d79a71a590e8" },
+    {
+      "file": "resort/lagoon-aerial",
+      "unsplash": "1589197331516-4d84b72ebde3",
+      "credit": {
+        "name": "Thomas Stadler",
+        "profile": "https://unsplash.com/@thomasstadler",
+        "photo": "https://unsplash.com/photos/aerial-view-of-white-and-gray-boat-on-sea-during-daytime-LFRUK7mslpk"
+      }
+    },
+    {
+      "file": "resort/cabanas-dusk",
+      "unsplash": "1571003123894-1f0594d2b5d9",
+      "credit": {
+        "name": "Saad Khan",
+        "profile": "https://unsplash.com/@sakhan88",
+        "photo": "https://unsplash.com/photos/resort-viewing-blue-sea-under-blue-and-white-sky-during-daytime-425b2PhNuHA"
+      },
+      "width": 2000
+    },
+    { "file": "resort/palm-pool-reflection", "unsplash": "1610641818989-c2051b5e2cfd" },
+
+    { "file": "coast/beach-sunrise", "unsplash": "1507525428034-b723cf961d3e" },
+    { "file": "coast/palm-shore", "unsplash": "1509233725247-49e657c54213" },
+    { "file": "coast/reef-coast-aerial", "unsplash": "1504681869696-d977211a5f4c" },
+    {
+      "file": "coast/shore-sunset",
+      "unsplash": "1559494007-9f5847c49d94",
+      "credit": {
+        "name": "Cristofer Maximilian",
+        "profile": "https://unsplash.com/@cristofer",
+        "photo": "https://unsplash.com/photos/beach-seashore-during-sunset-uQDRDqpYJHI"
+      }
+    },
+    { "file": "coast/quiet-cove", "unsplash": "1535262412227-85541e910204" },
+    { "file": "coast/beach-palms", "unsplash": "1586500036706-41963de24d8b" },
+
+    { "file": "stays/lagoon-villa-deck", "unsplash": "1584132967334-10e028bd69f7" },
+    { "file": "stays/lagoon-villa-bedroom", "unsplash": "1582719478250-c89cae4dc85b" },
+    { "file": "stays/lagoon-villa-bath", "unsplash": "1507652313519-d4e9174996dd" },
+    { "file": "stays/grove-villa-pool", "unsplash": "1582610116397-edb318620f90" },
+    { "file": "stays/grove-villa-bedroom", "unsplash": "1611892440504-42a792e24d32" },
+    { "file": "stays/grove-villa-veranda", "unsplash": "1615880484746-a134be9a6ecf" },
+    { "file": "stays/residence-pool", "unsplash": "1600011689032-8b628b8a8747" },
+    {
+      "file": "stays/residence-pavilion",
+      "unsplash": "1561501878-aabd62634533",
+      "credit": {
+        "name": "Roberto Nickson",
+        "profile": "https://unsplash.com/@rpnickson",
+        "photo": "https://unsplash.com/photos/chairs-near-pool-EeeKjwm2vDo"
+      }
+    },
+    { "file": "stays/overwater-suite-exterior", "unsplash": "1532408840957-031d8034aeef" },
+    { "file": "stays/overwater-suite-jetty", "unsplash": "1544550581-5f7ceaf7f992" },
+    { "file": "stays/reef-suite-aerial", "unsplash": "1540202404-a2f29016b523" },
+    { "file": "stays/reef-suite-cluster", "unsplash": "1590523277543-a94d2e4eb00b" },
+    { "file": "stays/reef-suite-pool", "unsplash": "1551918120-9739cb430c6d" },
+    { "file": "stays/horizon-suite-terrace", "unsplash": "1561501900-3701fa6a0864" },
+    { "file": "stays/horizon-suite-bedroom", "unsplash": "1618773928121-c32242e63f39" },
+    { "file": "stays/garden-bungalow-path", "unsplash": "1586375300773-8384e3e4916f" },
+    { "file": "stays/garden-bungalow-pool", "unsplash": "1520250497591-112f2f40a3f4" },
+    {
+      "file": "stays/garden-bungalow-thatch",
+      "unsplash": "1563911302283-d2bc129e7570",
+      "credit": {
+        "name": "Kelsey Curtis",
+        "profile": "https://unsplash.com/@kelseycurtis",
+        "photo": "https://unsplash.com/photos/thatch-huts-and-houses-by-the-pool-during-day--27u_GzlAFw"
+      }
+    },
+    { "file": "stays/beach-bungalow-pergola", "unsplash": "1520483601560-389dff434fdf" },
+    { "file": "stays/beach-bungalow-pool", "unsplash": "1566073771259-6a8506099945" },
+
+    { "file": "experiences/private-dining", "unsplash": "1511795409834-ef04bbd61622" },
+    {
+      "file": "experiences/floating-breakfast",
+      "unsplash": "1586861635167-e5223aadc9fe",
+      "credit": {
+        "name": "Rayyu Maldives",
+        "profile": "https://unsplash.com/@rayyu",
+        "photo": "https://unsplash.com/photos/floating-breakfast-trays-in-turquoise-pool-yWFF1xkULew"
+      }
+    },
+    { "file": "experiences/chef-plate", "unsplash": "1414235077428-338989a2e8c0" },
+    { "file": "experiences/spa-hot-stone", "unsplash": "1600334089648-b0d9d3028eb2" },
+    {
+      "file": "experiences/spa-massage",
+      "unsplash": "1544161515-4ab6ce6db874",
+      "credit": {
+        "name": "alan caishan",
+        "profile": "https://unsplash.com/@caishan119",
+        "photo": "https://unsplash.com/photos/woman-lying-with-prone-position-cU53ZFBr3lk"
+      }
+    },
+    { "file": "experiences/snorkel-turtle", "unsplash": "1591025207163-942350e47db2" },
+    { "file": "experiences/reef-garden", "unsplash": "1583212292454-1fe6229603b7" },
+    { "file": "experiences/sailing", "unsplash": "1540946485063-a40da27545f8" },
+    { "file": "experiences/island-canoe", "unsplash": "1552733407-5d5c46c3bb3b" },
+    { "file": "experiences/jungle-aerial", "unsplash": "1559628233-100c798642d4" }
+  ]
+}
