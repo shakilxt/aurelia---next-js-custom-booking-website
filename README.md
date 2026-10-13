@@ -206,8 +206,23 @@ proxy, set `NODE_USE_ENV_PROXY=1`.
 
 Every image has been checked at full size for logos, watermarks and recognisable brand marks,
 because a fictional resort must not borrow a real one's identity. Repeat that check when adding
-photos. Photographer names are not yet listed; they can be added to the manifest with the
-Unsplash API.
+photos.
+
+The site credits Unsplash in the footer and on the gallery page. Photographers confirmed through
+the Unsplash API so far (matched by image ID, also recorded in the manifest):
+
+| Image                            | Photographer                                            | Source                                                                                                                      |
+| -------------------------------- | ------------------------------------------------------- | --------------------------------------------------------------------------------------------------------------------------- |
+| `coast/shore-sunset`             | [Cristofer Maximilian](https://unsplash.com/@cristofer) | [View on Unsplash](https://unsplash.com/photos/beach-seashore-during-sunset-uQDRDqpYJHI)                                    |
+| `experiences/floating-breakfast` | [Rayyu Maldives](https://unsplash.com/@rayyu)           | [View on Unsplash](https://unsplash.com/photos/floating-breakfast-trays-in-turquoise-pool-yWFF1xkULew)                      |
+| `experiences/spa-massage`        | [alan caishan](https://unsplash.com/@caishan119)        | [View on Unsplash](https://unsplash.com/photos/woman-lying-with-prone-position-cU53ZFBr3lk)                                 |
+| `resort/cabanas-dusk`            | [Saad Khan](https://unsplash.com/@sakhan88)             | [View on Unsplash](https://unsplash.com/photos/resort-viewing-blue-sea-under-blue-and-white-sky-during-daytime-425b2PhNuHA) |
+| `resort/lagoon-aerial`           | [Thomas Stadler](https://unsplash.com/@thomasstadler)   | [View on Unsplash](https://unsplash.com/photos/aerial-view-of-white-and-gray-boat-on-sea-during-daytime-LFRUK7mslpk)        |
+| `stays/garden-bungalow-thatch`   | [Kelsey Curtis](https://unsplash.com/@kelseycurtis)     | [View on Unsplash](https://unsplash.com/photos/thatch-huts-and-houses-by-the-pool-during-day--27u_GzlAFw)                   |
+| `stays/residence-pavilion`       | [Roberto Nickson](https://unsplash.com/@rpnickson)      | [View on Unsplash](https://unsplash.com/photos/chairs-near-pool-EeeKjwm2vDo)                                                |
+
+The remaining photographers can be matched the same way; the API's demo rate limit (50 requests
+an hour) stopped this pass early.
 
 Cormorant Garamond and DM Sans are licensed under the SIL Open Font License (licences in
 `src/assets/fonts`). Pages load them through `next/font`; the social card uses the bundled
