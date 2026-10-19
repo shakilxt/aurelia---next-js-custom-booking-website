@@ -2,7 +2,7 @@
 
 A design-led frontend portfolio project: a fictional island resort in the South Pacific with
 accommodation discovery and a fully simulated booking flow. Built with Next.js 16, React 19,
-TypeScript and Tailwind CSS 4. See [`PROJECT_SPEC.md`](./PROJECT_SPEC.md) for the brief.
+TypeScript and Tailwind CSS 4.
 
 > **Demonstration only.** AURELIA is fictional. Prices, availability and guest notes are
 > illustrative. No reservations, payments or enquiries are created, stored or transmitted.
